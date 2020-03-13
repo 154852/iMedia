@@ -14,7 +14,7 @@ const sequelize: Sequelize = new Sequelize({
     models: [SessionKey, User, Game, Review]
 });
 
-sequelize.query("SET FOREIGN_KEY_CONSTRAINTS=0").then(() => {
+sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
     sequelize.drop().then(() => sequelize.sync({ force: true })).then(() => {
         for (let i = 1; i <= 3; i++) {
             User.signUpUser({
@@ -69,6 +69,6 @@ sequelize.query("SET FOREIGN_KEY_CONSTRAINTS=0").then(() => {
             }
         });
 
-        sequelize.query("SET FOREIGN_KEY_CONSTRAINTS=1");
+        sequelize.query("SET FOREIGN_KEY_CHECKS=1");
     });
 })
