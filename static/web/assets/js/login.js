@@ -17,9 +17,8 @@ const vue = new Vue({
 
         register: function() {
             userCTX.signup(vue.username, vue.email, vue.password).then(({error, data}) => {
-                console.log(error, data)
                 if (error) vue.error = error;
-            //     else window.open("/", "_self");
+                else window.open("/", "_self");
             });
         }
     }
