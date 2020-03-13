@@ -10,7 +10,7 @@ import Review from "./models/review";
 import * as fs from "fs";
 
 const app: express.Express = express();
-const port: number = 8080;
+const port: number = parseInt(process.env.PORT);
 
 const sequelize: Sequelize = new Sequelize({
     database: "enquiry",
