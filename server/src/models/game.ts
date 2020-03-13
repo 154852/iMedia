@@ -17,10 +17,13 @@ export interface GameResponse {
     id: number;
 }
 
-@Table({indexes: [{
-    fields: ["name", "description"],
-    type: "FULLTEXT"
-}]})
+@Table({
+    indexes: [{
+        fields: ["name", "description"],
+        type: "FULLTEXT",
+    }],
+    engine: "MyISAM"
+})
 export default class Game extends Model<Game> {
     public static creationActivity: Activity = new Activity(1);
 

@@ -1,6 +1,6 @@
 import { Table, Column, Model, Unique, AllowNull, Default, HasMany } from "sequelize-typescript";
 import * as crypto from "crypto";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import SessionKey from "./sessionkey";
 import { HasManyRemoveAssociationMixin, HasManyGetAssociationsMixin } from "sequelize/types";
 import * as fs from "fs";
