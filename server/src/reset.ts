@@ -3,12 +3,14 @@ import SessionKey from "./models/sessionkey";
 import User from "./models/user";
 import Game from "./models/game";
 import Review from "./models/review";
+import * as fs from "fs";
+import * as path from "path";
 
 const sequelize: Sequelize = new Sequelize({
     database: "enquiry",
-    dialect: "mysql",
+    dialect: "mariadb",
     username: "root",
-    password: "password1",
+    password: JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "secret.json")).toString()).dbPassword,
     models: [SessionKey, User, Game, Review]
 });
 

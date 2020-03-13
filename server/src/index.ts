@@ -7,15 +7,16 @@ import SessionKey from "./models/sessionkey";
 import * as security from "./security";
 import Game from "./models/game";
 import Review from "./models/review";
+import * as fs from "fs";
 
 const app: express.Express = express();
 const port: number = 8080;
 
 const sequelize: Sequelize = new Sequelize({
     database: "enquiry",
-    dialect: "mysql",
+    dialect: "mariadb",
     username: "root",
-    password: "password1",
+    password: JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "secret.json")).toString()).dbPassword,
     models: [SessionKey, User, Game, Review]
 });
 
