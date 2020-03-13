@@ -17,13 +17,7 @@ export interface GameResponse {
     id: number;
 }
 
-@Table({
-    indexes: [{
-        fields: ["name", "description"],
-        type: "FULLTEXT",
-    }],
-    engine: "MyISAM"
-})
+@Table(null)
 export default class Game extends Model<Game> {
     public static creationActivity: Activity = new Activity(1);
 
@@ -75,6 +69,7 @@ export default class Game extends Model<Game> {
     }
 
     public static search(query: string): Promise<GameResponse[]> {
+        //TODO: Write search
         return Game.findAll({
             where: Sequelize.literal("match(name, description) against (:query)"),
             replacements: { query },
