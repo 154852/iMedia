@@ -1,0 +1,262 @@
+body {
+  margin: 0;
+  font-family: "Sen", sans-serif;
+  background-color: white;
+}
+
+section {
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.gray-fill {
+  fill: #e4e4e4;
+}
+
+.gray-color {
+  color: #e4e4e4;
+}
+
+.gray-bg {
+  background-color: #e4e4e4;
+}
+
+.dark-gray-fill {
+  fill: #a3a3a3;
+}
+
+.dark-gray-bg {
+  background-color: #a3a3a3;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+input, textarea, button {
+  -webkit-appearance: none;
+  font: inherit;
+  padding: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input {
+  text-align: center;
+  width: 90%;
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a:not(.no-hover) {
+  transition: color linear 0.1s;
+  -webkit-transition: color linear 0.1s;
+  -moz-transition: color linear 0.1s;
+  -ms-transition: color linear 0.1s;
+  -o-transition: color linear 0.1s;
+}
+a:not(.no-hover):hover {
+  color: #a3a3a3;
+}
+
+a.inline {
+  display: inline;
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+footer svg {
+  width: 100%;
+  height: 100px;
+  display: block;
+}
+
+#footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: black;
+  padding-bottom: 40px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+#footer > * {
+  margin: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+
+button {
+  background-color: #e4e4e4;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color linear 0.05s, color linear 0.05s;
+  -webkit-transition: background-color linear 0.05s, color linear 0.05s;
+  -moz-transition: background-color linear 0.05s, color linear 0.05s;
+  -ms-transition: background-color linear 0.05s, color linear 0.05s;
+  -o-transition: background-color linear 0.05s, color linear 0.05s;
+}
+
+button:hover {
+  background-color: #a3a3a3;
+  color: white;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  z-index: 100;
+}
+nav > * {
+  width: 100%;
+}
+
+hr {
+  background-color: lightgray;
+  width: 80%;
+  margin: 0 auto;
+  height: 1px;
+  border: none;
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    font-size: 80%;
+  }
+
+  #footer {
+    display: block;
+  }
+  #footer > * {
+    height: 30px;
+    line-height: 30px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+body, #app {
+  overflow-x: hidden;
+}
+
+#landing {
+  width: 100%;
+  height: 100vh;
+}
+
+#title h2 {
+  font-size: 60px;
+  margin: 0 auto;
+}
+#title p {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#background-accent {
+  color: rgba(211, 211, 211, 0.4);
+  font-size: 250px;
+  margin: 0;
+}
+
+.admin-tool {
+  background-color: #f3f3f3;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 88.9%;
+  margin: 20px auto;
+  border: solid #f3f3f3 1px;
+}
+.admin-tool input.title {
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: solid #e4e4e4 1px;
+  width: 100%;
+  transition: border-color linear 0.1s;
+  -webkit-transition: border-color linear 0.1s;
+  -moz-transition: border-color linear 0.1s;
+  -ms-transition: border-color linear 0.1s;
+  -o-transition: border-color linear 0.1s;
+}
+.admin-tool textarea.body {
+  padding: 0;
+  padding-top: 10px;
+}
+.admin-tool.error {
+  border-color: red;
+}
+.admin-tool h2 {
+  text-align: right;
+  margin: 0;
+}
+
+hr {
+  margin-top: 20px;
+  width: 90%;
+}
+
+@media only screen and (max-width: 700px) {
+  #background-accent {
+    font-size: 150px;
+  }
+
+  #landing .search {
+    font-size: 30px;
+  }
+
+  #title {
+    font-size: 40px;
+  }
+}

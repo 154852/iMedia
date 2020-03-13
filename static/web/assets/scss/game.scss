@@ -1,0 +1,122 @@
+@use "./app.scss";
+
+// ----------- PAGE SPECIFIC -----------
+
+body, #app {
+    overflow-x: hidden;
+}
+
+#landing {
+    width: 100%;
+    height: 100vh;
+}
+
+#title {
+    h2 {
+        font-size: 60px;
+        margin: 0 auto;
+    }
+
+    p {
+        width: 600px;
+        margin: 0 auto;
+    }
+}
+
+#read-more {
+    top: 85%;
+    cursor: pointer;
+
+    p {
+        @include app.transition(margin-bottom linear 0.05s);
+        text-align: center;
+        margin-bottom: 4px;
+    }
+}
+
+#read-more:hover p {
+    margin-bottom: 20px;
+}
+
+#background-accent {
+    color: rgba(211, 211, 211, 0.4);
+    font-size: 250px;
+    margin: 0;
+}
+
+.review, .review-box {
+    background-color: rgb(243, 243, 243);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.review-wrapper, .review-box {
+    width: 88.9%;
+    margin: 20px auto;
+}
+
+.review-wrapper hr {
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+.review {
+    h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        text-align: right;
+    }
+
+    p {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+#make-review {
+    border: solid rgb(243, 243, 243) 1px;
+
+    input.title {
+        text-align: left;
+        padding: 0;
+        padding-bottom: 10px;
+        border-bottom: solid app.$gray 1px;
+        width: 100%;
+
+        @include app.transition(border-color linear 0.1s);
+    }
+
+    textarea.body {
+        padding: 0;
+        padding-top: 10px
+    }
+
+    &.error {
+        border-color: red;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #background-accent {
+        font-size: 150px;
+    }
+
+    #landing .search {
+        font-size: 30px;
+    }
+
+    .game {
+        height: 120px;
+    }
+
+    #title {
+        h2 {
+            font-size: 40px;
+        }
+
+        p {
+            width: 90vw;
+        }
+    }
+}

@@ -1,0 +1,105 @@
+@use "./app.scss";
+
+// ----------- PAGE SPECIFIC -----------
+
+body, #app {
+    overflow-x: hidden;
+}
+
+#landing {
+    width: 100%;
+    height: 100vh;
+
+    .search {
+        font-size: 50px;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: rgba(0, 0, 0, 0.2) 0 0 20px 10px;
+        color: white;
+        border-radius: 10px;
+
+        @include app.transition((background-color linear 0.1s, box-shadow linear 0.1s));
+    }
+
+    .search::placeholder {
+        color: app.$darkgray;
+    }
+
+    .search:focus {
+        background-color: rgba(54, 54, 54, 0.4);
+        box-shadow: rgba(56, 56, 56, 0.4) 0 0 20px 10px;
+
+        &::placeholder {
+            color: rgb(107, 107, 107);
+        }
+    }
+}
+
+#read-more {
+    top: 85%;
+    cursor: pointer;
+
+    p {
+        @include app.transition(margin-bottom linear 0.05s);
+        text-align: center;
+        margin-bottom: 4px;
+    }
+}
+
+#read-more:hover p {
+    margin-bottom: 20px;
+}
+
+#background-accent {
+    color: rgba(211, 211, 211, 0.4);
+    font-size: 250px;
+    margin: 0;
+    top: 30%;
+}
+
+.game {
+    width: 90%;
+    margin: 0 auto;
+    height: 150px;
+    border-radius: 10px;
+    position: relative;
+    color: white;
+    overflow: hidden;
+    text-align: center;
+
+    cursor: pointer;
+
+    @include app.transition(font-size linear 0.05s);
+
+    .image {
+        background-position: center;
+        background-size: cover;
+
+        @include app.transition(transform linear 0.05s);
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    &:hover {
+        font-size: 120%;
+
+        .image {
+            @include app.transform(scale(1.2));
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #background-accent {
+        font-size: 150px;
+    }
+
+    #landing .search {
+        font-size: 30px;
+    }
+
+    .game {
+        height: 120px;
+    }
+}

@@ -1,0 +1,296 @@
+body {
+  margin: 0;
+  font-family: "Sen", sans-serif;
+  background-color: white;
+}
+
+section {
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.gray-fill {
+  fill: #e4e4e4;
+}
+
+.gray-color {
+  color: #e4e4e4;
+}
+
+.gray-bg {
+  background-color: #e4e4e4;
+}
+
+.dark-gray-fill {
+  fill: #a3a3a3;
+}
+
+.dark-gray-bg {
+  background-color: #a3a3a3;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+input, textarea, button {
+  -webkit-appearance: none;
+  font: inherit;
+  padding: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input {
+  text-align: center;
+  width: 90%;
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a:not(.no-hover) {
+  transition: color linear 0.1s;
+  -webkit-transition: color linear 0.1s;
+  -moz-transition: color linear 0.1s;
+  -ms-transition: color linear 0.1s;
+  -o-transition: color linear 0.1s;
+}
+a:not(.no-hover):hover {
+  color: #a3a3a3;
+}
+
+a.inline {
+  display: inline;
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+footer svg {
+  width: 100%;
+  height: 100px;
+  display: block;
+}
+
+#footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: black;
+  padding-bottom: 40px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+#footer > * {
+  margin: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+
+button {
+  background-color: #e4e4e4;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color linear 0.05s, color linear 0.05s;
+  -webkit-transition: background-color linear 0.05s, color linear 0.05s;
+  -moz-transition: background-color linear 0.05s, color linear 0.05s;
+  -ms-transition: background-color linear 0.05s, color linear 0.05s;
+  -o-transition: background-color linear 0.05s, color linear 0.05s;
+}
+
+button:hover {
+  background-color: #a3a3a3;
+  color: white;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  z-index: 100;
+}
+nav > * {
+  width: 100%;
+}
+
+hr {
+  background-color: lightgray;
+  width: 80%;
+  margin: 0 auto;
+  height: 1px;
+  border: none;
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    font-size: 80%;
+  }
+
+  #footer {
+    display: block;
+  }
+  #footer > * {
+    height: 30px;
+    line-height: 30px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+body, #app {
+  overflow-x: hidden;
+}
+
+#landing {
+  width: 100%;
+  height: 100vh;
+}
+#landing .search {
+  font-size: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 20px 10px;
+  color: white;
+  border-radius: 10px;
+  transition: background-color linear 0.1s, box-shadow linear 0.1s;
+  -webkit-transition: background-color linear 0.1s, box-shadow linear 0.1s;
+  -moz-transition: background-color linear 0.1s, box-shadow linear 0.1s;
+  -ms-transition: background-color linear 0.1s, box-shadow linear 0.1s;
+  -o-transition: background-color linear 0.1s, box-shadow linear 0.1s;
+}
+#landing .search::placeholder {
+  color: #a3a3a3;
+}
+#landing .search:focus {
+  background-color: rgba(54, 54, 54, 0.4);
+  box-shadow: rgba(56, 56, 56, 0.4) 0 0 20px 10px;
+}
+#landing .search:focus::placeholder {
+  color: #6b6b6b;
+}
+
+#read-more {
+  top: 85%;
+  cursor: pointer;
+}
+#read-more p {
+  transition: margin-bottom linear 0.05s;
+  -webkit-transition: margin-bottom linear 0.05s;
+  -moz-transition: margin-bottom linear 0.05s;
+  -ms-transition: margin-bottom linear 0.05s;
+  -o-transition: margin-bottom linear 0.05s;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+#read-more:hover p {
+  margin-bottom: 20px;
+}
+
+#background-accent {
+  color: rgba(211, 211, 211, 0.4);
+  font-size: 250px;
+  margin: 0;
+  top: 30%;
+}
+
+.game {
+  width: 90%;
+  margin: 0 auto;
+  height: 150px;
+  border-radius: 10px;
+  position: relative;
+  color: white;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: font-size linear 0.05s;
+  -webkit-transition: font-size linear 0.05s;
+  -moz-transition: font-size linear 0.05s;
+  -ms-transition: font-size linear 0.05s;
+  -o-transition: font-size linear 0.05s;
+}
+.game .image {
+  background-position: center;
+  background-size: cover;
+  transition: transform linear 0.05s;
+  -webkit-transition: transform linear 0.05s;
+  -moz-transition: transform linear 0.05s;
+  -ms-transition: transform linear 0.05s;
+  -o-transition: transform linear 0.05s;
+}
+.game:not(:last-child) {
+  margin-bottom: 20px;
+}
+.game:hover {
+  font-size: 120%;
+}
+.game:hover .image {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
+@media only screen and (max-width: 700px) {
+  #background-accent {
+    font-size: 150px;
+  }
+
+  #landing .search {
+    font-size: 30px;
+  }
+
+  .game {
+    height: 120px;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+      "outDir": "web/assets/js",
+      "sourceMap": false,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "target": "es6"
+  },
+  "files": ["web/assets/ts/src/index.ts"]
+}

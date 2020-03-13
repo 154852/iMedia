@@ -1,0 +1,6 @@
+secret.json
+
+server/build
+server/build/*
+*/package-lock.json
+*/.DS_Store

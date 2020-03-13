@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>ENQUIRY | Admin</title>
+        <link href="/assets/css/admin.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="/assets/js/bundle.js"></script>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png" />
+
+        <link rel="manifest" href="/site.webmanifest">
+    </head>
+    <body>
+        <div id="app">
+            <nav>
+                <a href="/">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+            </nav>
+            <section id="landing">
+                <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
+                </svg>
+                <h1 class="no-select center" id="background-accent">EQY</h1>
+                <div class="center" style="text-align: center;" id="title">
+                    <h2>Admin Tools</h2>
+                </div>
+            </section>
+            <section class="gray-bg" style="display: inline-block; width: 100%;">
+                <div class="admin-tool" id="make-review" v-bind:class="{'error': createGameError != null}">
+                    <h2>Create Game</h2>
+                    <input type="text" class="title" placeholder="Game title" v-model="createGameData.name" />
+                    <input type="text" class="title" placeholder="Game image url" v-model="createGameData.imageURL" />
+                    <textarea class="body" placeholder="Game description" v-model="createGameData.description" rows="5"></textarea>
+                    <button @click="createGame()">Create</button>
+                    <p v-if="createGameError != null" class="error-message">{{createGameError}}</p>
+                </div>
+            </section>
+            <footer>
+                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
+                </svg>
+                <section id="footer">
+                    <h2>ENQUIRY</h2>
+                    <a href="/accessibility">Accessibility Settings</a>
+                    <a href="/contact">Contact Us</a>
+                </section>
+            </footer>
+        </div>
+        <script src="/assets/js/admin.js"></script>
+    </body>
+</html>

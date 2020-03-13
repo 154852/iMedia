@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>ENQUIRY | Game</title>
+        <link href="/assets/css/game.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="/assets/js/bundle.js"></script>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png" />
+
+        <link rel="manifest" href="/site.webmanifest">
+    </head>
+    <body>
+        <div id="app">
+            <nav>
+                <a href="/">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+            </nav>
+            <section id="landing">
+                <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
+                </svg>
+                <h1 class="no-select center" id="background-accent">EQY</h1>
+                <div class="no-select center" id="read-more" @click="readMore">
+                    <p>Read More</p>
+                    <svg viewBox="0 0 100 20" preserveAspectRatio="none" style="overflow: visible; height: 20px; width: 100px; display: block;">
+                        <polyline fill="none" style="stroke: black; stroke-width: 1px" points="0,0 50,20 100,0"></polyline>
+                    </svg>
+                </div>
+                <div class="center" style="text-align: center;" id="title" v-if="game != null">
+                    <h2>{{game.name}}</h2>
+                    <p>{{game.description}}</p>
+                </div>
+            </section>
+            <section class="gray-bg" style="display: inline-block; width: 100%;" v-if="game != null">
+                <div class="review-box" id="make-review" v-bind:class="{'error': error != null}">
+                    <input type="text" class="title" placeholder="Review title" v-model="create.title" />
+                    <textarea class="body" placeholder="What do you think of this game?" v-model="create.body" rows="5"></textarea>
+                    <button @click="createReview">Post</button>
+                    <p v-if="error != null" class="error-message">{{error}}</p>
+                </div>
+                <div v-for="review in game.reviews" class="review-wrapper">
+                    <hr />
+                    <div class="review">
+                        <h3>{{review.title}}</h3>
+                        <p>{{review.body}}</p>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
+                </svg>
+                <section id="footer">
+                    <h2>ENQUIRY</h2>
+                    <a href="/accessibility">Accessibility Settings</a>
+                    <a href="/contact">Contact Us</a>
+                </section>
+            </footer>
+        </div>
+        <script src="/assets/js/game.js"></script>
+    </body>
+</html>
