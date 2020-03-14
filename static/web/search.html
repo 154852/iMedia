@@ -33,7 +33,7 @@
                 <h2 style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px;">Search Results</h2>
                 <transition-group name="fade">
                     <a class="game no-hover" v-for="game in games" v-bind:href="'/game/' + game.id" v-bind:key="game.id">
-                        <img class="background image" v-bind:src="game.imageURL" v-bind:alt="game.name" onload="this.parentElement.classList.add('loaded')" />
+                        <img class="background image" v-bind:src="game.images[0]" v-bind:alt="game.name" onload="this.parentElement.classList.add('loaded')" />
                         <div class="background cover"></div>
                         <h2 class="center">{{game.name}}</h2>
                     </a>

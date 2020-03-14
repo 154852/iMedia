@@ -1,11 +1,13 @@
 import { Model, Column, AllowNull, Unique, Table, ForeignKey, BelongsTo, DataType } from "sequelize-typescript";
 import Game from "./game";
 import { Activity } from "../security";
+import User from "./user";
 
 export interface ReviewCreationOptions {
     title: string;
     gameID: number;
     body: string;
+    user: User;
 }
 
 export interface ReviewResponse {
@@ -14,6 +16,7 @@ export interface ReviewResponse {
     date: string;
     body: string;
     edited: string;
+    username: string;
 }
 
 @Table(null)
@@ -22,11 +25,13 @@ export default class Review extends Model<Review> {
 
     @AllowNull(false)
     @Unique(true)
-    @Column(null)
+    @Column({
+       type: DataType.STRING(300)
+    })
     public title: string;
 
     @AllowNull(false)
-    @Column(DataType.STRING(32))
+    @Column(DataType.STRING(1000))
     public body: string;
 
     @AllowNull(false)
@@ -37,14 +42,25 @@ export default class Review extends Model<Review> {
     @BelongsTo(() => Game)
     public game: Game;
 
-    public getReturnable(): ReviewResponse {
-        return {
-            title: this.title,
-            id: this.id,
-            date: this.createdAt,
-            edited: this.updatedAt,
-            body: this.body
-        };
+    @AllowNull(false)
+    @ForeignKey(() => User)
+    @Column(null)
+    public userID: number;
+
+    @BelongsTo(() => Game)
+    public user: User;
+
+    public getReturnable(): Promise<ReviewResponse> {
+        return User.findOne({where: {id: this.userID}}).then((user) => {
+            return {
+                title: this.title,
+                id: this.id,
+                date: this.createdAt,
+                edited: this.updatedAt,
+                body: this.body,
+                username: user.username
+            };
+        })
     }
 
     public static createReviewFromOptions(options: ReviewCreationOptions): Promise<Review> | string {
@@ -57,16 +73,8 @@ export default class Review extends Model<Review> {
         return Review.create({
             title: options.title,
             gameID: options.gameID,
-            body: options.body
-        });
-    }
-
-    public static read(id: number): Promise<ReviewResponse> {
-        return Review.findOne({
-            where: { id },
-            include: [Game]
-        }).then((review) => {
-            return review.getReturnable();
+            body: options.body,
+            userID: options.user.id
         });
     }
 }

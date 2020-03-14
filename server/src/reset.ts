@@ -15,9 +15,11 @@ const sequelize: Sequelize = new Sequelize({
 });
 
 sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
-    sequelize.drop().then(() => sequelize.sync({ force: true })).then(() => {
+    sequelize.drop().then(() => sequelize.sync({ force: true })).then(async () => {
+        let userPromises: Promise<User>[] = [];
+
         for (let i = 1; i <= 3; i++) {
-            User.signUpUser({
+            userPromises.push(User.signUpUser({
                 username: "Username" + i,
                 password: "Password" + i,
                 email: `email${i}@mail.com`
@@ -26,45 +28,50 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                     user.permissionLevel = 1;
                     user.save();
                 }
-            });
+                return user;
+            }));
         }
 
-        const titles: string[] = [
-            "Commodo incididunt nostrud tempor nostrud labore incididunt commodo eiusmod excepteur.",
-            "Magna reprehenderit minim exercitation laboris velit officia cupidatat voluptate excepteur incididunt commodo.",
-            "Esse nisi exercitation non deserunt labore minim incididunt deserunt.",
-            "Ex ullamco nulla labore tempor voluptate occaecat.",
-            "Excepteur ipsum in consectetur mollit ex esse ad aliqua tempor elit.",
-            "Excepteur Lorem mollit Lorem sit commodo.",
-            "Ut eiusmod in veniam ea incididunt magna proident pariatur sint do tempor laborum labore.",
-            "Excepteur ipsum id occaecat veniam ea duis officia eiusmod eu reprehenderit et aliqua ut.",
-            "Et sunt magna excepteur quis aute do non aute minim consectetur cupidatat ex."
-        ];
+        let users: User[] = await Promise.all(userPromises);
 
         (Game.createGameFromOptions({
             name: "League Of Legends",
-            description: "A description",
-            imageURL: "https://wallpaperaccess.com/full/217097.jpg"
+            description: "Cupidatat nostrud dolor id aliquip mollit est proident est laborum ad ut sit aute. Cillum elit culpa laborum amet. Eiusmod duis est reprehenderit laboris et culpa sint aliquip ea et pariatur in. Laboris cillum ea adipisicing laborum ut.",
+            images: [
+                "https://wallpaperaccess.com/full/217097.jpg",
+                "https://wallpaperaccess.com/full/217097.jpg",
+                "https://wallpaperaccess.com/full/217097.jpg",
+                "https://wallpaperaccess.com/full/217097.jpg"
+            ],
+            rating: 12
         }) as Promise<Game>).then((game) => {
             for (let i = 1; i <= 10; i++) {
-                Review.createReviewFromOptions({
-                    title: "Occaecat ad elit voluptate magna aliquip non voluptate aute culpa dolore anim. " + game.id + ":" + i,
-                    body: "A review, with index" + (i - 1),
-                    gameID: game.id
-                });
+                (Review.createReviewFromOptions({
+                    title: "Occaecat ad elit 1" + i,
+                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id. Sint consectetur consequat sint in consequat eiusmod nulla esse cupidatat.",
+                    gameID: game.id,
+                    user: users[Math.floor(Math.random() * users.length)]
+                }) as Promise<Review>).catch((error) => console.log(error));
             }
         });
 
         (Game.createGameFromOptions({
             name: "Undertale",
-            description: "Another description",
-            imageURL: "https://fontmeme.com/images/undertale-font.jpg"
+            description: "Incididunt nostrud sint in commodo eiusmod quis reprehenderit esse quis reprehenderit et nulla pariatur mollit. Amet deserunt irure minim commodo culpa. Do labore sunt sint labore dolore excepteur excepteur duis. In nisi sit ullamco labore in officia. Eiusmod ipsum mollit velit amet amet ad amet ad enim mollit labore dolore aliqua. Reprehenderit deserunt do excepteur fugiat cupidatat excepteur minim dolor occaecat. Consequat consectetur id commodo dolor aliqua aliqua officia occaecat eu officia aliquip ad nulla magna.",
+            images: [
+                "https://www.grabpcgames.com/wp-content/uploads/2018/10/full-pc-game-download-undertale.jpg",
+                "https://www.gamersdecide.com/sites/default/files/styles/news_images/public/undertale_cover.jpg",
+                "https://cdn.mos.cms.futurecdn.net/5nULLkfBtxNpjR5SmvmSw-1200-80.jpg",
+                "https://sm.ign.com/ign_za/screenshot/u/undertale-/undertale-gameplay_yn31.jpg"
+            ],
+            rating: 12
         }) as Promise<Game>).then((game) => {
             for (let i = 1; i <= 10; i++) {
                 Review.createReviewFromOptions({
-                    title: "Occaecat ad elit voluptate magna aliquip non voluptate aute culpa dolore anim. " + game.id + ":" + i,
-                    body: "A review, with index" + (i - 1),
-                    gameID: game.id
+                    title: "Occaecat ad elit 2" + i,
+                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id. Sint consectetur consequat sint in consequat eiusmod nulla esse cupidatat.",
+                    gameID: game.id,
+                    user: users[Math.floor(Math.random() * users.length)]
                 });
             }
         });

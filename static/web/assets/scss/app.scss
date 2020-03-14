@@ -102,6 +102,10 @@ a.inline {
     -moz-user-select: none;
 }
 
+.grid {
+    display: grid;
+}
+
 // ----------- APPLICATION SPECIFIC -----------
 
 .error-message {
@@ -190,5 +194,9 @@ hr {
 
     button {
         width: 100%;
+    }
+
+    .grid {
+        display: block;
     }
 }

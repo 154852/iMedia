@@ -35,10 +35,31 @@
                 </div>
                 <div class="center" style="text-align: center;" id="title" v-if="game != null">
                     <h2>{{game.name}}</h2>
-                    <p>{{game.description}}</p>
+                </div>
+            </section>
+            <section class="gray-bg" v-if="game != null" style="display: block; width: 100%;">
+                <h2 style="text-align: center; margin-top: 0">Some Details About The Game</h2>
+                <div id="details">
+                    <div class="grid" style="grid-template-columns: 150px 1fr; gap: 10px; min-height: 120px;">
+                        <div style="position: relative;" class="card padded fix-height">
+                            <div class="center" style="text-align: center;">
+                                <p style="margin: 0;">Pegi</p>
+                                <h2 style="margin: 0; font-size: 60px;">{{game.rating}}</h2>
+                            </div>
+                        </div>
+                        <div class="card padded">
+                            {{ game.description }}
+                        </div>
+                    </div>
+                    <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; height: 150px">
+                        <div class="card fix-height"><img v-bind:src="game.images[0]" v-bind:alt="game.name" /></div>
+                        <div class="card fix-height"><img v-bind:src="game.images[1]" v-bind:alt="game.name" /></div>
+                        <div class="card fix-height"><img v-bind:src="game.images[2]" v-bind:alt="game.name" /></div>
+                    </div>
                 </div>
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;" v-if="game != null">
+                <h2 style="text-align: center;">Your Reviews</h2>
                 <div class="review-box" id="make-review" v-bind:class="{'error': error != null}" v-if="userCTX.isLoggedIn(false)">
                     <input type="text" class="title" placeholder="Review title" v-model="create.title" />
                     <textarea class="body" placeholder="What do you think of this game?" v-model="create.body" rows="5"></textarea>
@@ -53,6 +74,7 @@
                     <div class="review">
                         <h3>{{review.title}}</h3>
                         <p>{{review.body}}</p>
+                        <div style="text-align: right; color: rgb(119, 119, 119); margin-top: 10px">Posted by {{review.username}} at {{review.dateString()}}</div>
                     </div>
                 </div>
             </section>

@@ -153,18 +153,16 @@ app.get("/api/game/details/:game", (req: express.Request, res: express.Response)
 });
 
 app.post("/api/review/create", (req: express.Request, res: express.Response) => {
-    Review.creationActivity.doesAllowUserInfo(req.body.user).then((acceptable) => {
+    Review.creationActivity.doesAllowUserInfoWithUserReturn(req.body.user).then(([acceptable, user]) => {
         if (acceptable) {
-            let promise: string | Promise<Review> = Review.createReviewFromOptions(req.body);
+            let promise: string | Promise<Review> = Review.createReviewFromOptions(Object.assign(req.body, {user}));
             if (typeof promise == "string") {
                 return res.status(400).send({
                     error: "ERR_INVALID_REVIEW_DETAILS",
                     message: promise
                 });
-            } else (promise as Promise<Review>).then((review) => {
-                return res.status(200).send({
-                    id: review.id
-                });
+            } else (promise as Promise<Review>).then(async (review) => {
+                res.status(200).send(await review.getReturnable());
             }).catch((error) => {
                 return res.status(400).send({
                     error: "ERR_INVALID_REVIEW_DETAILS",
@@ -192,6 +190,10 @@ app.use("/api/**", (req: express.Request, res: express.Response) => {
 
 app.get("/game/:id", (req: express.Request, res: express.Response) => {
     res.sendFile(path.join(staticDir, "game.html"));
+});
+
+app.get("/game-info/:id", (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(staticDir, "game-info.html"));
 });
 
 app.use("/**", (req: express.Request, res: express.Response) => {

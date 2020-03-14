@@ -27,4 +27,16 @@ export class Activity {
             });
         });
     }
+
+    public doesAllowUserInfoWithUserReturn(info: UserInfo): Promise<[boolean, User]> {
+        if (this.requiredPermission >= 3 && info.key == null) return new Promise<[boolean, User]>((resolve) => resolve([true, null]));
+
+        return new Promise<[boolean, User]>((resolve, error) => {
+            User.getFromKey(info.key).then((user) => {
+                if (user == null) return error("Session key does not exist");
+                if (this.requiredPermission >= user.permissionLevel) return resolve([true, user]);
+                return resolve([false, user]);
+            });
+        });
+    }
 }

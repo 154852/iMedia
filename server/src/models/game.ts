@@ -1,19 +1,29 @@
-import { Model, Column, AllowNull, Unique, HasMany, Table, getModels } from "sequelize-typescript";
+import { Model, Column, AllowNull, Unique, HasMany, Table, getModels, DataType } from "sequelize-typescript";
 import Review, { ReviewResponse } from "./review";
 import { Activity } from "../security";
 import { Sequelize } from "sequelize";
 import * as FuzzySearch from "fuzzy-search";
+import User from "./user";
 
 export interface GameCreationOptions {
     name: string;
     description: string;
-    imageURL: string;
+    images: string[];
+    rating: number;
+
+}
+
+export interface GamePreviewResponse {
+    name: string;
+    logoImage: string;
+    id: number;
 }
 
 export interface GameResponse {
     name: string;
     description: string;
-    imageURL: string;
+    images: string[];
+    rating: number;
     reviews: ReviewResponse[];
     id: number;
 }
@@ -28,12 +38,36 @@ export default class Game extends Model<Game> {
     public name: string;
 
     @AllowNull(false)
-    @Column(null)
+    @Column({
+       type: DataType.STRING(1000) 
+    })
     public description: string;
 
     @AllowNull(false)
     @Column(null)
-    public imageURL: string;
+    public rating: number;
+
+    @AllowNull(false)
+    @Column({
+       type: DataType.STRING(300) 
+    })
+    public logoImage: string;
+
+    @AllowNull(false)
+    @Column({
+       type: DataType.STRING(300) 
+    })
+    public image1: string;
+    @AllowNull(false)
+    @Column({
+       type: DataType.STRING(300) 
+    })
+    public image2: string;
+    @AllowNull(false)
+    @Column({
+       type: DataType.STRING(300) 
+    })
+    public image3: string;
 
     @HasMany(() => Review)
     public reviews: Review[];
@@ -46,10 +80,19 @@ export default class Game extends Model<Game> {
                 name: this.name,
                 description: this.description,
                 reviews: responses,
-                imageURL: this.imageURL,
+                images: [this.logoImage, this.image1, this.image2, this.image3],
+                rating: this.rating,
                 id: this.id
             };
         });
+    }
+
+    public getPreview(): GamePreviewResponse {
+        return {
+            name: this.name,
+            logoImage: this.logoImage,
+            id: this.id
+        };
     }
 
     public static createGameFromOptions(options: GameCreationOptions): Promise<Game> | string {
@@ -58,22 +101,28 @@ export default class Game extends Model<Game> {
         if (options.name.length < 2) return "Game name must be at least two characters in length";
         if (options.description.length < 2) return "Game description must be at least two characters in length";
         
-        return Game.create(options);
+        return Game.create({
+            name: options.name,
+            description: options.description,
+            logoImage: options.images[0],
+            image1: options.images[1],
+            image2: options.images[2],
+            image3: options.images[3],
+            rating: options.rating
+        });
     }
 
-    public static list(): Promise<GameResponse[]> {
+    public static list(): Promise<GamePreviewResponse[]> {
         return Game.findAll({
             where: {},
-            include: [Review],
             limit: 10
-        }).map((game: Game) => game.getResponse(0)).all();
+        }).map((game: Game) => game.getPreview()).all();
     }
 
-    public static search(query: string): Promise<GameResponse[]> {
+    public static search(query: string): Promise<GamePreviewResponse[]> {
         return Game.findAll({
-            where: {},
-            include: [Review]
-        }).map((game: Game) => game.getResponse(0)).all().then((games) => {
+            where: {}
+        }).map((game: Game) => game.getPreview()).all().then((games) => {
             return new FuzzySearch(games, ["name", "description"], {sort: true}).search(query).slice(0, 100);
         });
     }

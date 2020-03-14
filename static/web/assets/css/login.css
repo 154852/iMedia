@@ -98,6 +98,10 @@ a.inline {
   -moz-user-select: none;
 }
 
+.grid {
+  display: grid;
+}
+
 .error-message {
   color: red;
   text-align: center;
@@ -184,6 +188,10 @@ hr {
 
   button {
     width: 100%;
+  }
+
+  .grid {
+    display: block;
   }
 }
 main {
