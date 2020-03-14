@@ -267,8 +267,8 @@ body, #app {
   -o-transition: font-size linear 0.05s;
 }
 .game .image {
-  background-position: center;
-  background-size: cover;
+  object-fit: cover;
+  object-position: center;
   transition: transform linear 0.05s;
   -webkit-transition: transform linear 0.05s;
   -moz-transition: transform linear 0.05s;

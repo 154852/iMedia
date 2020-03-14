@@ -71,8 +71,8 @@ body, #app {
     @include app.transition(font-size linear 0.05s);
 
     .image {
-        background-position: center;
-        background-size: cover;
+        object-fit: cover;
+        object-position: center;
 
         @include app.transition(transform linear 0.05s);
     }

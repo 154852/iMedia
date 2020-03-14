@@ -32,10 +32,15 @@
                 </div>
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;">
-                <div class="admin-tool" id="make-review" v-bind:class="{'error': createGameError != null}">
+                <div class="admin-tool" id="make-review" v-bind:class="{'error': createGameError != null}" @keyup="createGameData.cache()">
                     <h2>Create Game</h2>
                     <input type="text" class="title" placeholder="Game title" v-model="createGameData.name" />
-                    <input type="text" class="title" placeholder="Game image url" v-model="createGameData.imageURL" />
+                    <input type="number" class="title" placeholder="Game pegi rating" v-model="createGameData.rating" />
+                    <input type="text" class="title" placeholder="Game logo image url" v-model="createGameData.images[0]" />
+                    <input type="text" class="title" placeholder="Game image 1 url" v-model="createGameData.images[1]" />
+                    <input type="text" class="title" placeholder="Game image 2 url" v-model="createGameData.images[3]" />
+                    <input type="text" class="title" placeholder="Game image 3 url" v-model="createGameData.images[2]" />
+
                     <textarea class="body" placeholder="Game description" v-model="createGameData.description" rows="5"></textarea>
                     <button @click="createGame()">Create</button>
                     <p v-if="createGameError != null" class="error-message">{{createGameError}}</p>

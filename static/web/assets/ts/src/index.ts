@@ -137,13 +137,28 @@ class Game {
             name: this.name,
             description: this.description,
             images: this.images,
-            user: UserContext.context.key()
+            user: UserContext.context.key(),
+            rating: this.rating
         }).then((response) => {
             this.id = response.data.id;
             return { error: null, data: this };
         }).catch((error) => {
             return { error: error.response.data.message, data: null };
         });
+    }
+
+    public cache(): void {
+        localStorage.setItem("createGameCache", JSON.stringify(this));
+    }
+
+    public static loadCache(): Game {
+        let jsonString: string = localStorage.getItem("createGameCache")
+        if (jsonString == null) return null;
+        return Game.fromJsonResponse(JSON.parse(jsonString));
+    }
+
+    public static clearCache(): void {
+        localStorage.removeItem("createGameCache");
     }
 }
 

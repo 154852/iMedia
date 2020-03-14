@@ -113,7 +113,7 @@ app.post("/api/game/create", (req: express.Request, res: express.Response) => {
             }).catch((error) => {
                 return res.status(400).send({
                     error: "ERR_INVALID_GAME_DETAILS",
-                    message: "A game with this name already exists"
+                    message: error.toString()
                 });
             });
         }
