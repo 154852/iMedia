@@ -2,6 +2,7 @@ import { Model, Column, AllowNull, Unique, HasMany, Table, getModels } from "seq
 import Review, { ReviewResponse } from "./review";
 import { Activity } from "../security";
 import { Sequelize } from "sequelize";
+import * as FuzzySearch from "fuzzy-search";
 
 export interface GameCreationOptions {
     name: string;
@@ -69,12 +70,12 @@ export default class Game extends Model<Game> {
     }
 
     public static search(query: string): Promise<GameResponse[]> {
-        //TODO: Write search
         return Game.findAll({
-            where: Sequelize.literal("match(name, description) against (:query)"),
-            replacements: { query },
+            where: {},
             include: [Review]
-        }).map((game: Game) => game.getResponse(0)).all();
+        }).map((game: Game) => game.getResponse(0)).all().then((games) => {
+            return new FuzzySearch(games, ["name", "description"], {sort: true}).search(query).slice(0, 100);
+        });
     }
 
     public static details(id: number): Promise<GameResponse> {

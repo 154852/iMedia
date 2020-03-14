@@ -8,7 +8,7 @@ import * as path from "path";
 
 const sequelize: Sequelize = new Sequelize({
     database: "enquiry",
-    dialect: "mariadb",
+    dialect: process.platform == "darwin"? "mysql":"mariadb",
     username: "root",
     password: JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "secret.json")).toString()).dbPassword,
     models: [SessionKey, User, Game, Review]

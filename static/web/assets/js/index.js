@@ -25,7 +25,7 @@ const vue = new Vue({
     methods: {
         readMore: () => smoothScroll(window.innerHeight, 300),
         search: () => {
-            window.open("/search?q=" + encodeURIComponent(vue.query), "_self");
+            window.open("/search#" + encodeURIComponent(vue.query), "_self");
         }
     }
 });

@@ -14,7 +14,7 @@ const port: number = 12357;
 
 const sequelize: Sequelize = new Sequelize({
     database: "enquiry",
-    dialect: "mariadb",
+    dialect: process.platform == "darwin"? "mysql":"mariadb",
     username: "root",
     password: JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "..", "secret.json")).toString()).dbPassword,
     models: [SessionKey, User, Game, Review]
@@ -23,6 +23,10 @@ const sequelize: Sequelize = new Sequelize({
 const staticDir: string = path.join(__dirname, "..", "..", "static", "web");
 app.use(express.static(staticDir, {extensions: ["html"]}));
 app.use(bodyParser.json());
+
+app.get("/sitemap.txt", (req: express.Request, res: express.Response, next: () => void) => {
+    res.type("txt").send(["/", "/search", "/login", "/register"].map((x) => "https://enquiry.thundernerds.org" + x).join("\n"));
+});
 
 app.post("/api/**", (req: express.Request, res: express.Response, next: () => void) => {
     if (!req.is("json")) {
@@ -120,7 +124,7 @@ app.post("/api/game/create", (req: express.Request, res: express.Response) => {
     }).catch((error) => {
         return res.status(400).send({
             error: "ERR_INCORRECT_SESSION_KEY",
-            message: "The session key is invalid"
+            message: "Please log in first"
         });
     });
 });
@@ -174,7 +178,7 @@ app.post("/api/review/create", (req: express.Request, res: express.Response) => 
     }).catch((error) => {
         return res.status(400).send({
             error: "ERR_INCORRECT_SESSION_KEY",
-            message: "The session key is invalid"
+            message: "Please log in first"
         });
     });
 });

@@ -39,11 +39,14 @@
                 </div>
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;" v-if="game != null">
-                <div class="review-box" id="make-review" v-bind:class="{'error': error != null}">
+                <div class="review-box" id="make-review" v-bind:class="{'error': error != null}" v-if="userCTX.isLoggedIn(false)">
                     <input type="text" class="title" placeholder="Review title" v-model="create.title" />
                     <textarea class="body" placeholder="What do you think of this game?" v-model="create.body" rows="5"></textarea>
                     <button @click="createReview">Post</button>
                     <p v-if="error != null" class="error-message">{{error}}</p>
+                </div>
+                <div class="review-box" style="text-align: center;" v-else>
+                    <a href="/login" class="inline">Log in here</a> to post a review of your own
                 </div>
                 <div v-for="review in game.reviews" class="review-wrapper">
                     <hr />

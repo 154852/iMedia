@@ -230,24 +230,43 @@ body, #app {
   height: 150px;
   border-radius: 10px;
   position: relative;
-  color: white;
+  color: black;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
-  transition: font-size linear 0.05s;
-  -webkit-transition: font-size linear 0.05s;
-  -moz-transition: font-size linear 0.05s;
-  -ms-transition: font-size linear 0.05s;
-  -o-transition: font-size linear 0.05s;
+  transition: font-size linear 0.05s, color linear 0.2s;
+  -webkit-transition: font-size linear 0.05s, color linear 0.2s;
+  -moz-transition: font-size linear 0.05s, color linear 0.2s;
+  -ms-transition: font-size linear 0.05s, color linear 0.2s;
+  -o-transition: font-size linear 0.05s, color linear 0.2s;
 }
 .game .image {
-  background-position: center;
-  background-size: cover;
-  transition: transform linear 0.05s;
-  -webkit-transition: transform linear 0.05s;
-  -moz-transition: transform linear 0.05s;
-  -ms-transition: transform linear 0.05s;
-  -o-transition: transform linear 0.05s;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: transform linear 0.05s, opacity linear 0.2s;
+  -webkit-transition: transform linear 0.05s, opacity linear 0.2s;
+  -moz-transition: transform linear 0.05s, opacity linear 0.2s;
+  -ms-transition: transform linear 0.05s, opacity linear 0.2s;
+  -o-transition: transform linear 0.05s, opacity linear 0.2s;
+}
+.game.loaded {
+  color: white;
+}
+.game.loaded .image {
+  opacity: 1;
+}
+.game.loaded .cover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.game .cover {
+  background-color: white;
+  transition: background-color linear 0.2s;
+  -webkit-transition: background-color linear 0.2s;
+  -moz-transition: background-color linear 0.2s;
+  -ms-transition: background-color linear 0.2s;
+  -o-transition: background-color linear 0.2s;
 }
 .game:not(:last-child) {
   margin-bottom: 20px;
@@ -277,11 +296,11 @@ body, #app {
   }
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity linear 0.1s;
-  -webkit-transition: opacity linear 0.1s;
-  -moz-transition: opacity linear 0.1s;
-  -ms-transition: opacity linear 0.1s;
-  -o-transition: opacity linear 0.1s;
+  transition: opacity linear 0.3s;
+  -webkit-transition: opacity linear 0.3s;
+  -moz-transition: opacity linear 0.3s;
+  -ms-transition: opacity linear 0.3s;
+  -o-transition: opacity linear 0.3s;
 }
 
 .fade-enter, .fade-leave-to {
