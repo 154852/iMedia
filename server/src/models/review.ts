@@ -26,12 +26,12 @@ export default class Review extends Model<Review> {
     @AllowNull(false)
     @Unique(true)
     @Column({
-       type: DataType.STRING(300)
+       type: DataType.STRING(255)
     })
     public title: string;
 
     @AllowNull(false)
-    @Column(DataType.STRING(1000))
+    @Column(DataType.STRING(255))
     public body: string;
 
     @AllowNull(false)

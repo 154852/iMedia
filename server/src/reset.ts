@@ -48,7 +48,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
             for (let i = 1; i <= 10; i++) {
                 (Review.createReviewFromOptions({
                     title: "Occaecat ad elit 1" + i,
-                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id. Sint consectetur consequat sint in consequat eiusmod nulla esse cupidatat.",
+                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id.",
                     gameID: game.id,
                     user: users[Math.floor(Math.random() * users.length)]
                 }) as Promise<Review>).catch((error) => console.log(error));
@@ -57,7 +57,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
 
         (Game.createGameFromOptions({
             name: "Undertale",
-            description: "Incididunt nostrud sint in commodo eiusmod quis reprehenderit esse quis reprehenderit et nulla pariatur mollit. Amet deserunt irure minim commodo culpa. Do labore sunt sint labore dolore excepteur excepteur duis. In nisi sit ullamco labore in officia. Eiusmod ipsum mollit velit amet amet ad amet ad enim mollit labore dolore aliqua. Reprehenderit deserunt do excepteur fugiat cupidatat excepteur minim dolor occaecat. Consequat consectetur id commodo dolor aliqua aliqua officia occaecat eu officia aliquip ad nulla magna.",
+            description: "Incididunt nostrud sint in commodo eiusmod quis reprehenderit esse quis reprehenderit et nulla pariatur mollit. Amet deserunt irure minim commodo culpa. Do labore sunt sint labore dolore excepteur excepteur duis. In nisi sit ullamco labore in officia.",
             images: [
                 "https://www.grabpcgames.com/wp-content/uploads/2018/10/full-pc-game-download-undertale.jpg",
                 "https://www.gamersdecide.com/sites/default/files/styles/news_images/public/undertale_cover.jpg",
@@ -69,7 +69,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
             for (let i = 1; i <= 10; i++) {
                 Review.createReviewFromOptions({
                     title: "Occaecat ad elit 2" + i,
-                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id. Sint consectetur consequat sint in consequat eiusmod nulla esse cupidatat.",
+                    body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id.",
                     gameID: game.id,
                     user: users[Math.floor(Math.random() * users.length)]
                 });

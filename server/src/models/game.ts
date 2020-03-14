@@ -39,7 +39,7 @@ export default class Game extends Model<Game> {
 
     @AllowNull(false)
     @Column({
-       type: DataType.STRING(1000) 
+       type: DataType.STRING(255) 
     })
     public description: string;
 
@@ -49,23 +49,23 @@ export default class Game extends Model<Game> {
 
     @AllowNull(false)
     @Column({
-       type: DataType.STRING(300) 
+       type: DataType.STRING(255) 
     })
     public logoImage: string;
 
     @AllowNull(false)
     @Column({
-       type: DataType.STRING(300) 
+       type: DataType.STRING(255) 
     })
     public image1: string;
     @AllowNull(false)
     @Column({
-       type: DataType.STRING(300) 
+       type: DataType.STRING(255) 
     })
     public image2: string;
     @AllowNull(false)
     @Column({
-       type: DataType.STRING(300) 
+       type: DataType.STRING(255) 
     })
     public image3: string;
 
