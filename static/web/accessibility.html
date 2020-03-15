@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>ENQUIRY | Search</title>
-        <link href="/assets/css/search.css" rel="stylesheet" type="text/css" />
+        <title>ENQUIRY | Accessibility</title>
+        <link href="/assets/css/accessibility.css" rel="stylesheet" type="text/css" />
         <script src="/assets/lib/vue.js"></script>
         <script src="/assets/js/bundle.js"></script>
 
@@ -22,23 +22,27 @@
                 <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
-                <svg class="background" style="top: 1px" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <h1 class="no-select center" id="background-accent">EQY</h1>
-                <input type="text" class="search center" v-bind:placeholder="lang.term('search')" @input="search" v-model="query" />
+                <div class="no-select center" id="read-more" @click="readMore">
+                    <p>{{lang.term('readmore')}}</p>
+                    <svg viewBox="0 0 100 20" preserveAspectRatio="none" style="overflow: visible; height: 20px; width: 100px; display: block;">
+                        <polyline fill="none" style="stroke: black; stroke-width: 1px" points="0,0 50,20 100,0"></polyline>
+                    </svg>
+                </div>
+                <div class="center" style="text-align: center;" id="title">
+                    <h2>{{lang.term('accessibilitysettings')}}</h2>
+                    <p>{{lang.term('how_help')}}</p>
+                </div>
             </section>
-            <section class="gray-bg">
-                <h2 style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px;">{{lang.term('search_results')}}</h2>
-                <transition-group name="fade">
-                    <a class="game no-hover" v-for="game in games" v-bind:href="'/' + lang + '/game/' + game.id" v-bind:key="game.id">
-                        <img class="background image" v-bind:src="game.images[0]" v-bind:alt="game.name" onload="this.parentElement.classList.add('loaded')" />
-                        <div class="background cover"></div>
-                        <h2 class="center">{{game.name}}</h2>
-                    </a>
-                </transition-group>
-                <div v-if="games.length == 0 && toAdd.length == 0">
-                    <p style="text-align: center; margin: 0; padding-bottom: 10px; color: gray">{{lang.term('sorry_no_games_found')}}</p>
+            <section class="gray-bg" style="display: block; width: 100%">
+                <div style="width: 90%; margin: 0 auto;">
+                    <h2 style="margin: 0; padding: 10px 0">{{lang.term('language')}}</h2>
+                    <div class="card" style="margin-bottom: 10px;">{{accessibility.language.name}} ({{lang.term('selected')}})</div>
+                    <hr />
+                    <div class="card can-hover" v-for="language in Language.options()" v-if="accessibility.language != language" style="cursor: pointer;" @click="accessibility.setLanguage(language)">{{language.name}}</div>
                 </div>
             </section>
             <footer>
@@ -52,6 +56,6 @@
                 </section>
             </footer>
         </div>
-        <script src="/assets/js/search.js"></script>
+        <script src="/assets/js/accessibility.js"></script>
     </body>
 </html>

@@ -1,0 +1,103 @@
+@use "./app.scss";
+
+// ----------- PAGE SPECIFIC -----------
+
+body, #app {
+    overflow-x: hidden;
+}
+
+#landing {
+    width: 100%;
+    height: 100vh;
+}
+
+#title {
+    h2 {
+        font-size: 60px;
+        margin: 0 auto;
+    }
+
+    p {
+        width: 600px;
+        margin: 0 auto;
+    }
+}
+
+#read-more {
+    top: 85%;
+    cursor: pointer;
+
+    p {
+        @include app.transition(margin-bottom linear 0.05s);
+        text-align: center;
+        margin-bottom: 4px;
+    }
+
+    svg {
+        margin: 0 auto;
+    }
+}
+
+#read-more:hover p {
+    margin-bottom: 20px;
+}
+
+#background-accent {
+    color: rgba(211, 211, 211, 0.4);
+    font-size: 250px;
+    margin: 0;
+}
+
+@media only screen and (max-width: 700px) {
+    #background-accent {
+        font-size: 150px;
+    }
+
+    #landing .search {
+        font-size: 30px;
+    }
+
+    .game {
+        height: 120px;
+    }
+
+    #title {
+        h2 {
+            font-size: 40px;
+        }
+
+        p {
+            width: 90vw;
+        }
+    }
+}
+
+.card {
+    background-color: rgb(243, 243, 243);
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 100%;
+    margin-top: 10px;
+    padding: 10px;
+
+    @include app.transition(background-color linear 0.1s);
+}
+
+.card.can-hover:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.selected {
+    background-color: white;
+}
+
+@media only screen and (max-width: 700px) {
+    .grid {
+        height: auto !important;
+    }
+
+    .card.fix-height {
+        height: 150px !important;
+    }
+}

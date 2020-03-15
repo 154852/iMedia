@@ -193,107 +193,136 @@ class Game {
     }
 }
 
+class Accessibility {
+    public language: Language;
+
+    public constructor(language: Language) {
+        this.language = language;
+    }
+
+    public setLanguage(language: Language) {
+        window.open(window.location.href.replace(this.language.code, language.code), "_self");
+    }
+
+    public static load(): Accessibility {
+        return new Accessibility(Language.load());
+    }
+}
+
 class Language {
-    public static languageMap: Map<string, Map<string, string>> = new Map([
-        ["en", Language.parseLanguageString(`
-login: Log In
-or: or
-signup: Sign Up
-logout: Log Out
-search: Search
-readmore: Read More
-accessibilitysettings: Accessibility Settings
-contactus: Contact Us
-search_results: Search Results
-sorry_no_games_found: Sorry, no games were found with this name
-some_details: Some Details About The Game
-reviews: Reviews
-post: Post
-log_in_here: Log in here
-to_post_review: to post a review of your own
-posted_by: Posted by
-at: at
-on: on
-email: Email
-password: Password
-username: Username
-dont_have_account: Don't yet have an account? You can
-signup_here: Sign up here.
-already_have_account: Already have an account? You can
-signin_here: sign in here.
-create: Create
-admintools: Admin Tools
-gametitle: Game Title
-game_pegi_rating: Game pegi rating
-game_logo_image_url: Game Logo Image Url
-game_1_image_url: Game Image 1 Url
-game_2_image_url: Game Image 2 Url
-game_3_image_url: Game Image 3 Url
-game_description: Game Description
-create_game: Create Game
-averagerating: Average Rating
-reviewtitle: Review title
-whatdoyouthink: What are your thoughts on this game?
-`)], ["fr", Language.parseLanguageString(`
-login: S'Identifier
-or: ou
-signup: S'Inscrire
-logout: Se Déconnecter
-search: Chercher
-readmore: Continue de Lire
-accessibilitysettings: Paramètres D'Accessibilité
-contactus: Nous Contacter
-search_results: Résultats de Recherche
-sorry_no_games_found: Désolé, aucun jeu n'a été trouvé avec ce nom
-some_details: Quelques détails sur le jeu
-reviews: Commentaires
-post: Publier
-log_in_here: Connectez-vous ici
-to_post_review: pour publier votre propre avis
-posted_by: Posté par
-at: à
-on:
-email: Email
-password: Mot de passe
-username: Nom d'utilisateur
-dont_have_account: Vous n'avez pas encore de compte? Vous pouvez
-signup_here: vous inscrire ici.
-already_have_account: Vous avez déjà un compte? Vous pouvez
-signin_here: vous connecter ici
-create: Créer
-admintools: Outils D'Administration
-gametitle: Titre du Jeu
-game_pegi_rating: Évaluation du jeu pegi
-game_logo_image_url: URL du logo du jeu
-game_1_image_url: URL de l'image du jeu 1
-game_2_image_url: URL de l'image du jeu 2
-game_3_image_url: URL de l'image du jeu 3
-game_description: Description du jeu
-create_game: Créer un jeu
-averagerating: Note Moyenne
-reviewtitle: Titre du commentaire
-whatdoyouthink: Que pensez-vous de ce jeu?
-`)]
-]);
+    public static languages: Map<string, Language> = new Map([
+        ["en", new Language("en", "English", Language.parseLanguageString(`
+        login: Log In
+        or: or
+        signup: Sign Up
+        logout: Log Out
+        search: Search
+        readmore: Read More
+        accessibilitysettings: Accessibility Settings
+        contactus: Contact Us
+        search_results: Search Results
+        sorry_no_games_found: Sorry, no games were found with this name
+        some_details: Some Details About The Game
+        reviews: Reviews
+        post: Post
+        log_in_here: Log in here
+        to_post_review: to post a review of your own
+        posted_by: Posted by
+        at: at
+        on: on
+        email: Email
+        password: Password
+        username: Username
+        dont_have_account: Don't yet have an account? You can
+        signup_here: Sign up here.
+        already_have_account: Already have an account? You can
+        signin_here: sign in here.
+        create: Create
+        admintools: Admin Tools
+        gametitle: Game Title
+        game_pegi_rating: Game pegi rating
+        game_logo_image_url: Game Logo Image Url
+        game_1_image_url: Game Image 1 Url
+        game_2_image_url: Game Image 2 Url
+        game_3_image_url: Game Image 3 Url
+        game_description: Game Description
+        create_game: Create Game
+        averagerating: Average Rating
+        reviewtitle: Review title
+        whatdoyouthink: What are your thoughts on this game?
+        how_help: What can we do to help you?
+        language: Language
+        selected: selected
+        `))],
+        ["fr", new Language("fr", "French", Language.parseLanguageString(`
+        login: S'Identifier
+        or: ou
+        signup: S'Inscrire
+        logout: Se Déconnecter
+        search: Chercher
+        readmore: Continue de Lire
+        accessibilitysettings: Paramètres D'Accessibilité
+        contactus: Nous Contacter
+        search_results: Résultats de Recherche
+        sorry_no_games_found: Désolé, aucun jeu n'a été trouvé avec ce nom
+        some_details: Quelques détails sur le jeu
+        reviews: Commentaires
+        post: Publier
+        log_in_here: Connectez-vous ici
+        to_post_review: pour publier votre propre avis
+        posted_by: Posté par
+        at: à
+        on:
+        email: Email
+        password: Mot de passe
+        username: Nom d'utilisateur
+        dont_have_account: Vous n'avez pas encore de compte? Vous pouvez
+        signup_here: vous inscrire ici.
+        already_have_account: Vous avez déjà un compte? Vous pouvez
+        signin_here: vous connecter ici
+        create: Créer
+        admintools: Outils D'Administration
+        gametitle: Titre du Jeu
+        game_pegi_rating: Évaluation du jeu pegi
+        game_logo_image_url: URL du logo du jeu
+        game_1_image_url: URL de l'image du jeu 1
+        game_2_image_url: URL de l'image du jeu 2
+        game_3_image_url: URL de l'image du jeu 3
+        game_description: Description du jeu
+        create_game: Créer un jeu
+        averagerating: Note Moyenne
+        reviewtitle: Titre du commentaire
+        whatdoyouthink: Que pensez-vous de ce jeu?
+        how_help: Que pouvons-nous faire pour vous aider?
+        language: Langue
+        selected: choisie
+        `))]
+    ]);
 
+    public name: string;
     public code: string;
+    public map: Map<string, string>;
 
-    public constructor(code: string) {
+    public constructor(code: string, name: string, map: Map<string, string>) {
+        this.name = name;
         this.code = code;
-
-        if (!Language.languageMap.has(this.code)) window.open(window.location.href.replace(this.code, "en"), "_self");
+        this.map = map;
     }
 
     public term(id: string): string {
-        return Language.languageMap.get(this.code).get(id);
+        return this.map.get(id);
     }
 
     public toString(): string {
         return this.code;
     }
 
+    public static options(): Language[] {
+        return [...Language.languages.values()];
+    }
+
     public static load(): Language {
-        return new Language(/\/([a-z][a-z])\/.*/.exec(window.location.href)[1]);
+        return Language.languages.get(/\/([a-z][a-z])\/.*/.exec(window.location.href)[1]);
     }
 
     public static parseLanguageString(s: string): Map<string, string> {
@@ -305,4 +334,7 @@ whatdoyouthink: Que pensez-vous de ce jeu?
 (window as any).GameReview = GameReview;
 UserContext.context = new UserContext();
 (window as any).userCTX = UserContext.context;
-(window as any).lang = Language.load();
+const accessibility: Accessibility = Accessibility.load();
+(window as any).accessibility = accessibility;
+(window as any).lang = accessibility.language;
+(window as any).Language = Language;

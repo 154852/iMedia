@@ -21,6 +21,22 @@
 $gray: rgb(228, 228, 228);
 $darkgray: rgb(163, 163, 163);
 
+@font-face {
+	font-family: 'Sen';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Sen Regular'), local('Sen-Regular'), url(/assets/lib/senregular.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Sen';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: local('Sen Bold'), local('Sen-Bold'), url(/assets/lib/senbold.ttf) format('truetype');
+}
+
 body {
     margin: 0;
     font-family: 'Sen', sans-serif;

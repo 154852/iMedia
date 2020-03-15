@@ -253,56 +253,6 @@ body, #app {
   margin: 0;
 }
 
-.review, .review-box {
-  background-color: #f3f3f3;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
-.review-wrapper, .review-box {
-  width: 88.9%;
-  margin: 20px auto;
-}
-
-.review-wrapper hr {
-  margin-bottom: 20px;
-  width: 90%;
-}
-
-.review h3 {
-  margin-top: 0;
-  margin-bottom: 5px;
-  text-align: right;
-}
-.review p {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-#make-review {
-  border: solid #f3f3f3 1px;
-}
-#make-review input.title {
-  text-align: left;
-  padding: 0;
-  padding-bottom: 10px;
-  border-bottom: solid #e4e4e4 1px;
-  width: 100%;
-  transition: border-color linear 0.1s;
-  -webkit-transition: border-color linear 0.1s;
-  -moz-transition: border-color linear 0.1s;
-  -ms-transition: border-color linear 0.1s;
-  -o-transition: border-color linear 0.1s;
-}
-#make-review textarea.body {
-  padding: 0;
-  padding-top: 10px;
-}
-#make-review.error {
-  border-color: red;
-}
-
 @media only screen and (max-width: 700px) {
   #background-accent {
     font-size: 150px;
@@ -323,56 +273,35 @@ body, #app {
     width: 90vw;
   }
 }
-#details {
-  width: 90%;
-  margin: 0 auto;
-}
-#details .card {
+.card {
   background-color: #f3f3f3;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
   height: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  transition: background-color linear 0.1s;
+  -webkit-transition: background-color linear 0.1s;
+  -moz-transition: background-color linear 0.1s;
+  -ms-transition: background-color linear 0.1s;
+  -o-transition: background-color linear 0.1s;
 }
-#details .card.padded {
-  padding: 20px;
+
+.card.can-hover:hover {
+  background-color: white;
 }
-#details .card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+
+.selected {
+  background-color: white;
 }
 
 @media only screen and (max-width: 700px) {
-  #details .grid {
+  .grid {
     height: auto !important;
   }
 
-  .card {
-    margin-top: 10px;
-  }
   .card.fix-height {
     height: 150px !important;
   }
-}
-.star-icon {
-  height: 15px;
-}
-
-.star-edit {
-  cursor: pointer;
-  transition: fill linear 0.1s;
-  -webkit-transition: fill linear 0.1s;
-  -moz-transition: fill linear 0.1s;
-  -ms-transition: fill linear 0.1s;
-  -o-transition: fill linear 0.1s;
-  padding: 3px;
-  fill: #9b9b9b;
-}
-.star-edit.selected {
-  fill: #424242;
-}
-.star-edit:hover:not(.selected) {
-  fill: #636363;
 }
