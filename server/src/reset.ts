@@ -50,7 +50,8 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                     title: "Occaecat ad elit 1" + i,
                     body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id.",
                     gameID: game.id,
-                    user: users[Math.floor(Math.random() * users.length)]
+                    user: users[Math.floor(Math.random() * users.length)],
+                    starRating: Math.random() * 6
                 }) as Promise<Review>).catch((error) => console.log(error));
             }
         });
@@ -71,7 +72,8 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                     title: "Occaecat ad elit 2" + i,
                     body: "Adipisicing adipisicing aliqua do velit Lorem id sunt sunt sint. Ex id nulla commodo aute. Ipsum incididunt tempor ex id esse nulla. Dolore anim sint veniam dolor nulla ullamco amet elit sit irure eiusmod consequat id.",
                     gameID: game.id,
-                    user: users[Math.floor(Math.random() * users.length)]
+                    user: users[Math.floor(Math.random() * users.length)],
+                    starRating: Math.random() * 6
                 });
             }
         });

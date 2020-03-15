@@ -8,6 +8,7 @@ export interface ReviewCreationOptions {
     gameID: number;
     body: string;
     user: User;
+    starRating: number;
 }
 
 export interface ReviewResponse {
@@ -35,6 +36,10 @@ export default class Review extends Model<Review> {
     public body: string;
 
     @AllowNull(false)
+    @Column(null)
+    public starRating: number;
+
+    @AllowNull(false)
     @ForeignKey(() => Game)
     @Column(null)
     public gameID: number;
@@ -58,7 +63,8 @@ export default class Review extends Model<Review> {
                 date: this.createdAt,
                 edited: this.updatedAt,
                 body: this.body,
-                username: user.username
+                username: user.username,
+                starRating: this.starRating
             };
         })
     }
@@ -74,7 +80,8 @@ export default class Review extends Model<Review> {
             title: options.title,
             gameID: options.gameID,
             body: options.body,
-            userID: options.user.id
+            userID: options.user.id,
+            starRating: Math.max(Math.min(Math.round(options.starRating), 5), 1)
         });
     }
 }

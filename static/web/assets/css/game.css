@@ -342,3 +342,23 @@ body, #app {
     height: 150px !important;
   }
 }
+.star-icon {
+  height: 15px;
+}
+
+.star-edit {
+  cursor: pointer;
+  transition: fill linear 0.1s;
+  -webkit-transition: fill linear 0.1s;
+  -moz-transition: fill linear 0.1s;
+  -ms-transition: fill linear 0.1s;
+  -o-transition: fill linear 0.1s;
+  padding: 3px;
+  fill: #9b9b9b;
+}
+.star-edit.selected {
+  fill: #424242;
+}
+.star-edit:hover:not(.selected) {
+  fill: #636363;
+}

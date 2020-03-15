@@ -22,6 +22,19 @@
                 <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
                 <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
+            <svg id="stars" style="display: none;" version="1.1">
+                <symbol id="stars-full-star" viewBox="0 0 102 18">
+                    <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792 5.657 6.243.907-4.517 4.404 1.066 6.218" />
+                </symbol>
+
+                <symbol id="stars-all-star" viewBox="0 0 102 18">
+                    <use xlink:href="#stars-full-star" />
+                    <use xlink:href="#stars-full-star" transform="translate(21)" />
+                    <use xlink:href="#stars-full-star" transform="translate(42)" />
+                    <use xlink:href="#stars-full-star" transform="translate(63)" />
+                    <use xlink:href="#stars-full-star" transform="translate(84)" />
+                </symbol>
+            </svg>
             <section id="landing">
                 <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
@@ -35,6 +48,11 @@
                 </div>
                 <div class="center" style="text-align: center;" id="title" v-if="game != null">
                     <h2>{{game.name}}</h2>
+                    <p>Average Rating:</p>
+                    <svg class="star-icon" viewBox="0 0 102 18">
+                        <use xlink:href="#stars-all-star" fill="#9b9b9b" v-for="i in (5 - game.averageStars)" v-bind:transform="'translate(' + (21 * (i - 1)) + ')'" />
+                        <use xlink:href="#stars-full-star" fill="#424242" v-for="i in game.averageStars" v-bind:transform="'translate(' + (21 * (i - 1)) + ')'" />
+                    </svg>
                 </div>
             </section>
             <section class="gray-bg" v-if="game != null" style="display: block; width: 100%;">
@@ -60,8 +78,11 @@
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;" v-if="game != null">
                 <h2 style="text-align: center;">{{lang.term('reviews')}}</h2>
-                <div class="review-box" id="make-review" v-bind:class="{'error': error != null}" v-if="userCTX.isLoggedIn(false)">
+                <div class="review-box" id="make-review" v-bind:class="{'error': error != null}" v-if="userCTX.isLoggedIn(false)" @keyup="create.cache(game.id)">
                     <input type="text" class="title" placeholder="Review title" v-model="create.title" />
+                    <svg viewBox="0 0 102 18" style="display: block; margin: 10px auto; height: 25px">
+                        <use class="star-edit" xlink:href="#stars-full-star" v-for="i in 5" v-bind:transform="'translate(' + (21 * (i - 1)) + ')'" v-bind:class="{'selected': create.starRating >= i}" @click="create.starRating = i" />
+                    </svg>
                     <textarea class="body" placeholder="What do you think of this game?" v-model="create.body" rows="5"></textarea>
                     <button @click="createReview">{{lang.term('post')}}</button>
                     <p v-if="error != null" class="error-message">{{error}}</p>
@@ -72,7 +93,13 @@
                 <div v-for="review in game.reviews" class="review-wrapper">
                     <hr />
                     <div class="review">
-                        <h3>{{review.title}}</h3>
+                        <h3>
+                            <svg class="star-icon" viewBox="0 0 102 18">
+                                <use xlink:href="#stars-all-star" fill="#9b9b9b" v-for="i in (5 - review.starRating)" v-bind:transform="'translate(' + (21 * (i - 1)) + ')'" />
+                                <use xlink:href="#stars-full-star" fill="#424242" v-for="i in review.starRating" v-bind:transform="'translate(' + (21 * (i - 1)) + ')'" />
+                            </svg>
+                            {{review.title}}
+                        </h3>
                         <p>{{review.body}}</p>
                         <div style="text-align: right; color: rgb(119, 119, 119); margin-top: 10px">{{lang.term('posted_by')}} {{review.username}} {{lang.term('at')}} {{review.dateString(lang.term('on'))}}</div>
                     </div>

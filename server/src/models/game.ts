@@ -133,7 +133,7 @@ export default class Game extends Model<Game> {
             include: [Review]
         }).then((game) => {
             if (game == null) return null;
-            return game.getResponse(20);
+            return game.getResponse(30);
         });
     }
 }

@@ -64,13 +64,15 @@ class GameReview {
     public body: string;
     public date: Date;
     public username: string;
+    public starRating: number;
 
-    public constructor(id: number, title: string, body: string, username: string, date: Date) {
+    public constructor(id: number, title: string, body: string, username: string, starRating: number, date: Date) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.date = date;
         this.username = username;
+        this.starRating = starRating;
     }
 
     public dateString(onString: string): string {
@@ -79,17 +81,43 @@ class GameReview {
     }
 
     public static fromJsonResponse(json: any): GameReview {
-        return new GameReview(json.id, json.title, json.body, json.username, new Date(json.date));
+        return new GameReview(json.id, json.title, json.body, json.username, json.starRating, new Date(json.date));
     }
 
-    public static create(title: string, body: string, game: Game): Promise<APIResponse<GameReview>> {
-        return axios.post("/api/review/create", {title, body, gameID: game.id, user: UserContext.context.key()}).then((response) => {
+    public static create(title: string, body: string, game: Game, starRating: number): Promise<APIResponse<GameReview>> {
+        return axios.post("/api/review/create", {title, body, gameID: game.id, user: UserContext.context.key(), starRating}).then((response) => {
             let review = GameReview.fromJsonResponse(response.data);
             game.reviews.splice(0, 0, review);
             return { error: null, data: review };
         }).catch((error) => {
             return { error: error.response.data.message, data: null };
         });
+    }
+
+    public cache(gameID: number): void {
+        let existing: string = localStorage.getItem("createReviewCache");
+        let json: any = {};
+        if (existing != null) json = JSON.parse(existing);
+        json[gameID] = this;
+
+        localStorage.setItem("createReviewCache", JSON.stringify(json));
+    }
+
+    public static loadCache(gameID: number): GameReview {
+        let jsonString: string = localStorage.getItem("createReviewCache");
+        if (jsonString == null) return null;
+        let json: any = JSON.parse(jsonString)[gameID];
+        if (json == null) return null;
+        return GameReview.fromJsonResponse(json);
+    }
+
+    public static clearCache(gameID: number): void {
+        let existing: string = localStorage.getItem("createReviewCache");
+        if (existing == null) return;
+
+        let json = JSON.parse(existing);
+        delete json[gameID];
+        localStorage.setItem("createReviewCache", JSON.stringify(json));
     }
 }
 
@@ -100,6 +128,7 @@ class Game {
     public id: number;
     public reviews: GameReview[];
     public rating: number;
+    public averageStars: number;
 
     public constructor(id: number, name: string, description: string, rating: number, images: string[] = null, reviews: GameReview[] = null) {
         this.id = id;
@@ -108,6 +137,8 @@ class Game {
         this.images = images || [];
         this.reviews = reviews || [];
         this.rating = rating;
+
+        this.averageStars = this.reviews.length == 0? 0:Math.round((this.reviews.reduce((prev, curr) => prev + curr.starRating, 0) / this.reviews.length));
     }
 
     public static getFullList(id: number | string): Promise<Game> {
@@ -243,10 +274,12 @@ create_game: Créer un jeu
 
     public constructor(code: string) {
         this.code = code;
+
+        if (!Language.languageMap.has(this.code)) window.open(window.location.href.replace(this.code, "en"), "_self");
     }
 
     public term(id: string): string {
-        return (Language.languageMap.get(this.code) || Language.languageMap.get("en")).get(id);
+        return Language.languageMap.get(this.code).get(id);
     }
 
     public toString(): string {

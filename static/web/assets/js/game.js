@@ -19,10 +19,7 @@ const vue = new Vue({
     el: "#app",
     data: {
         game: null,
-        create: {
-            title: "",
-            body: ""
-        },
+        create: new GameReview(null, "", "", null, 1, null),
         error: null,
         userCTX, lang
     },
@@ -31,13 +28,14 @@ const vue = new Vue({
             GameReview.create(
                 vue.create.title,
                 vue.create.body,
-                vue.game
+                vue.game,
+                vue.create.starRating
             ).then(({error, review}) => {
                 if (error) vue.error = error;
                 else {
-                    vue.create.title = "";
-                    vue.create.body = "";
+                    vue.create = new GameReview(null, "", "");
                     vue.error = null;
+                    GameReview.clearCache(vue.game.id);
                 }
             });
         },
@@ -47,6 +45,7 @@ const vue = new Vue({
 
 let gameID = window.location.pathname.match(/\/game\/([0-9]+)/)[1];
 
-Game.getFullList(gameID).then((games) => {
-    vue.game = games;
+Game.getFullList(gameID).then((game) => {
+    vue.game = game;
+    vue.create = GameReview.loadCache(game.id) || vue.create;
 });

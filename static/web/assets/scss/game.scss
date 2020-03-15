@@ -161,3 +161,23 @@ body, #app {
         margin-top: 10px;
     }
 }
+
+.star-icon {
+    height: 15px;
+}
+
+.star-edit {
+    cursor: pointer;
+    @include app.transition(fill linear 0.1s);
+    padding: 3px;
+
+    fill: #9b9b9b;
+
+    &.selected {
+        fill: #424242;
+    }
+
+    &:hover:not(.selected) {
+        fill: #636363;
+    }
+}
