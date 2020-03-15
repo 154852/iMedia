@@ -231,6 +231,9 @@ game_2_image_url: Game Image 2 Url
 game_3_image_url: Game Image 3 Url
 game_description: Game Description
 create_game: Create Game
+averagerating: Average Rating
+reviewtitle: Review title
+whatdoyouthink: What are your thoughts on this game?
 `)], ["fr", Language.parseLanguageString(`
 login: S'Identifier
 or: ou
@@ -267,6 +270,9 @@ game_2_image_url: URL de l'image du jeu 2
 game_3_image_url: URL de l'image du jeu 3
 game_description: Description du jeu
 create_game: Créer un jeu
+averagerating: Note Moyenne
+reviewtitle: Titre du commentaire
+whatdoyouthink: Que pensez-vous de ce jeu?
 `)]
 ]);
 
