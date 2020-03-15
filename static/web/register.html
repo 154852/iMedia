@@ -18,23 +18,23 @@
     <body>
         <div id="app">
             <nav>
-                <a href="/">ENQUIRY</a>
-                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
-                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+                <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <main>
                 <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <div class="center" id="window" v-bind:class="{'error': error != null}" @keyup.enter="register">
-                    <h1 style="text-align: center;">Register</h1>
+                    <h1 style="text-align: center;">{{lang.term('signup')}}</h1>
                     <hr />
-                    <p style="text-align: center;">Already have an account? You can <a href="/login" class="inline">sign in here</a>.</p>
+                    <p style="text-align: center;">{{lang.term('already_have_account')}} <a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('signin_here')}}</a></p>
                     <hr style="margin-bottom: 10px;" />
-                    <input type="text" placeholder="Username" v-model="username" />
-                    <input type="text" placeholder="Email" v-model="email" />
-                    <input type="password" placeholder="Password" v-model="password" />
-                    <button @click="register">Register</button>
+                    <input type="text" v-bind:placeholder="lang.term('username')" v-model="username" />
+                    <input type="text" v-bind:placeholder="lang.term('email')" v-model="email" />
+                    <input type="password" v-bind:placeholder="lang.term('password')" v-model="password" />
+                    <button @click="register">{{lang.term('signup')}}</button>
                     <p v-if="error != null" class="error-message">{{error}}</p>
                 </div>
             </main>
@@ -44,8 +44,8 @@
                 </svg>
                 <section id="footer">
                     <h2>ENQUIRY</h2>
-                    <a href="/accessibility">Accessibility Settings</a>
-                    <a href="/contact">Contact Us</a>
+                    <a v-bind:href="'/' + lang + '/accessibility'">{{lang.term('accessibilitysettings')}}</a>
+                    <a v-bind:href="'/' + lang + '/contact'">{{lang.term('contactus')}}</a>
                 </section>
             </footer>
         </div>

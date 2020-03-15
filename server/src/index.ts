@@ -21,7 +21,13 @@ const sequelize: Sequelize = new Sequelize({
 });
 
 const staticDir: string = path.join(__dirname, "..", "..", "static", "web");
-app.use(express.static(staticDir, {extensions: ["html"]}));
+
+app.get("/", (req: express.Request, res: express.Response) => {
+    let redirect: string = "/" + (req.headers["accept-language"] || "en").split(/:|,|-/)[0];
+    res.status(307).setHeader("Location", redirect);
+    res.send(`<a href='${redirect}'>Redirect</a>`);
+});
+
 app.use(bodyParser.json());
 
 app.get("/sitemap.txt", (req: express.Request, res: express.Response, next: () => void) => {
@@ -188,18 +194,19 @@ app.use("/api/**", (req: express.Request, res: express.Response) => {
     });
 });
 
-app.get("/game/:id", (req: express.Request, res: express.Response) => {
+app.get("/:lang/game/:id", (req: express.Request, res: express.Response) => {
     res.sendFile(path.join(staticDir, "game.html"));
 });
 
-app.get("/game-info/:id", (req: express.Request, res: express.Response) => {
-    res.sendFile(path.join(staticDir, "game-info.html"));
+app.get("/site.webmanifest", (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(staticDir, "site.webmanifest"));
 });
 
+app.use("/assets", express.static(path.join(staticDir, "assets")));
+app.use("/:lang/", express.static(path.join(staticDir), {extensions: ["html"]}));
 app.use("/**", (req: express.Request, res: express.Response) => {
     res.status(404).send("Page not found");
 });
-
 
 app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`);

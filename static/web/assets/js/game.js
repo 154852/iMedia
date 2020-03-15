@@ -24,7 +24,7 @@ const vue = new Vue({
             body: ""
         },
         error: null,
-        userCTX
+        userCTX, lang
     },
     methods: {
         createReview: function() {

@@ -3,7 +3,7 @@ const vue = new Vue({
     data: {
         games: [],
         query: decodeURIComponent(window.location.hash.split("#")[1] || ""),
-        userCTX,
+        userCTX, lang,
         timeout: null,
         toAdd: []
     },

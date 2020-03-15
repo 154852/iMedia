@@ -3,7 +3,7 @@ const vue = new Vue({
     data: {
         createGameData: Game.loadCache() || new Game(null, "", "", null),
         createGameError: null,
-        userCTX
+        userCTX, lang
     },
     methods: {
         createGame: function() {
@@ -13,7 +13,7 @@ const vue = new Vue({
                 else {
                     vue.createGameData = new Game(null, "", "", "");
                     vue.createGameError = null;
-                    window.open("/game/" + data.id, "_blank");
+                    window.open("/" + lang + "/game/" + data.id, "_blank");
                     Game.clearCache();
                 }
             });

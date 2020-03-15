@@ -18,9 +18,9 @@
     <body>
         <div id="app">
             <nav>
-                <a href="/">ENQUIRY</a>
-                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
-                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+                <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
                 <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -28,21 +28,21 @@
                 </svg>
                 <h1 class="no-select center" id="background-accent">EQY</h1>
                 <div class="center" style="text-align: center;" id="title">
-                    <h2>Admin Tools</h2>
+                    <h2>{{lang.term('admintools')}}</h2>
                 </div>
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;">
                 <div class="admin-tool" id="make-review" v-bind:class="{'error': createGameError != null}" @keyup="createGameData.cache()">
-                    <h2>Create Game</h2>
-                    <input type="text" class="title" placeholder="Game title" v-model="createGameData.name" />
-                    <input type="number" class="title" placeholder="Game pegi rating" v-model="createGameData.rating" />
-                    <input type="text" class="title" placeholder="Game logo image url" v-model="createGameData.images[0]" />
-                    <input type="text" class="title" placeholder="Game image 1 url" v-model="createGameData.images[1]" />
-                    <input type="text" class="title" placeholder="Game image 2 url" v-model="createGameData.images[3]" />
-                    <input type="text" class="title" placeholder="Game image 3 url" v-model="createGameData.images[2]" />
+                    <h2>{{lang.term('create_game')}}</h2>
+                    <input type="text" class="title" v-bind:placeholder="lang.term('gametitle')" v-model="createGameData.name" />
+                    <input type="number" class="title" v-bind:placeholder="lang.term('game_pegi_rating')" v-model="createGameData.rating" />
+                    <input type="text" class="title" v-bind:placeholder="lang.term('game_logo_image_url')" v-model="createGameData.images[0]" />
+                    <input type="text" class="title" v-bind:placeholder="lang.term('game_1_image_url')" v-model="createGameData.images[1]" />
+                    <input type="text" class="title" v-bind:placeholder="lang.term('game_2_image_url')" v-model="createGameData.images[3]" />
+                    <input type="text" class="title" v-bind:placeholder="lang.term('game_3_image_url')" v-model="createGameData.images[2]" />
 
-                    <textarea class="body" placeholder="Game description" v-model="createGameData.description" rows="5"></textarea>
-                    <button @click="createGame()">Create</button>
+                    <textarea class="body" v-bind:placeholder="lang.term('game_description')" v-model="createGameData.description" rows="5"></textarea>
+                    <button @click="createGame()">{{lang.term('create')}}</button>
                     <p v-if="createGameError != null" class="error-message">{{createGameError}}</p>
                 </div>
             </section>
@@ -52,8 +52,8 @@
                 </svg>
                 <section id="footer">
                     <h2>ENQUIRY</h2>
-                    <a href="/accessibility">Accessibility Settings</a>
-                    <a href="/contact">Contact Us</a>
+                    <a v-bind:href="'/' + lang + '/accessibility'">{{lang.term('accessibilitysettings')}}</a>
+                    <a v-bind:href="'/' + lang + '/contact'">{{lang.term('contactus')}}</a>
                 </section>
             </footer>
         </div>

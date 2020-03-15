@@ -18,9 +18,9 @@
     <body>
         <div id="app">
             <nav>
-                <a href="/">ENQUIRY</a>
-                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
-                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+                <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
                 <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -28,7 +28,7 @@
                 </svg>
                 <h1 class="no-select center" id="background-accent">EQY</h1>
                 <div class="no-select center" id="read-more" @click="readMore">
-                    <p>Read More</p>
+                    <p>{{lang.term('readmore')}}</p>
                     <svg viewBox="0 0 100 20" preserveAspectRatio="none" style="overflow: visible; height: 20px; width: 100px; display: block;">
                         <polyline fill="none" style="stroke: black; stroke-width: 1px" points="0,0 50,20 100,0"></polyline>
                     </svg>
@@ -38,7 +38,7 @@
                 </div>
             </section>
             <section class="gray-bg" v-if="game != null" style="display: block; width: 100%;">
-                <h2 style="text-align: center; margin-top: 0">Some Details About The Game</h2>
+                <h2 style="text-align: center; margin-top: 0">{{lang.term('some_details')}}</h2>
                 <div id="details">
                     <div class="grid" style="grid-template-columns: 150px 1fr; gap: 10px; min-height: 120px;">
                         <div style="position: relative;" class="card padded fix-height">
@@ -59,22 +59,22 @@
                 </div>
             </section>
             <section class="gray-bg" style="display: inline-block; width: 100%;" v-if="game != null">
-                <h2 style="text-align: center;">Your Reviews</h2>
+                <h2 style="text-align: center;">{{lang.term('reviews')}}</h2>
                 <div class="review-box" id="make-review" v-bind:class="{'error': error != null}" v-if="userCTX.isLoggedIn(false)">
                     <input type="text" class="title" placeholder="Review title" v-model="create.title" />
                     <textarea class="body" placeholder="What do you think of this game?" v-model="create.body" rows="5"></textarea>
-                    <button @click="createReview">Post</button>
+                    <button @click="createReview">{{lang.term('post')}}</button>
                     <p v-if="error != null" class="error-message">{{error}}</p>
                 </div>
                 <div class="review-box" style="text-align: center;" v-else>
-                    <a href="/login" class="inline">Log in here</a> to post a review of your own
+                    <a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('log_in_here')}}</a> {{lang.term('to_post_review')}}
                 </div>
                 <div v-for="review in game.reviews" class="review-wrapper">
                     <hr />
                     <div class="review">
                         <h3>{{review.title}}</h3>
                         <p>{{review.body}}</p>
-                        <div style="text-align: right; color: rgb(119, 119, 119); margin-top: 10px">Posted by {{review.username}} at {{review.dateString()}}</div>
+                        <div style="text-align: right; color: rgb(119, 119, 119); margin-top: 10px">{{lang.term('posted_by')}} {{review.username}} {{lang.term('at')}} {{review.dateString(lang.term('on'))}}</div>
                     </div>
                 </div>
             </section>
@@ -84,8 +84,8 @@
                 </svg>
                 <section id="footer">
                     <h2>ENQUIRY</h2>
-                    <a href="/accessibility">Accessibility Settings</a>
-                    <a href="/contact">Contact Us</a>
+                    <a v-bind:href="'/' + lang + '/accessibility'">{{lang.term('accessibilitysettings')}}</a>
+                    <a v-bind:href="'/' + lang + '/contact'">{{lang.term('contactus')}}</a>
                 </section>
             </footer>
         </div>

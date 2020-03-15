@@ -20,12 +20,12 @@ const vue = new Vue({
     data: {
         games: [],
         query: "",
-        userCTX
+        userCTX, lang
     },
     methods: {
         readMore: () => smoothScroll(window.innerHeight, 300),
         search: () => {
-            window.open("/search#" + encodeURIComponent(vue.query), "_self");
+            window.open("/" + vue.lang + "/search#" + encodeURIComponent(vue.query), "_self");
         }
     }
 });

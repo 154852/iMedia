@@ -18,28 +18,28 @@
     <body>
         <div id="app">
             <nav>
-                <a href="/">ENQUIRY</a>
-                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a href="/login" class="inline">Log In</a> or <a href="/register" class="inline">Sign Up</a></div>
-                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">Log Out</a></div>
+                <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
+                <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
+                <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
                 <svg class="background" style="top: 1px" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <h1 class="no-select center" id="background-accent">EQY</h1>
-                <input type="text" class="search center" placeholder="Search" @input="search" v-model="query" />
+                <input type="text" class="search center" v-bind:placeholder="lang.term('search')" @input="search" v-model="query" />
             </section>
             <section class="gray-bg">
-                <h2 style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px;">Search Results</h2>
+                <h2 style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px;">{{lang.term('search_results')}}</h2>
                 <transition-group name="fade">
-                    <a class="game no-hover" v-for="game in games" v-bind:href="'/game/' + game.id" v-bind:key="game.id">
+                    <a class="game no-hover" v-for="game in games" v-bind:href="'/' + lang + '/game/' + game.id" v-bind:key="game.id">
                         <img class="background image" v-bind:src="game.images[0]" v-bind:alt="game.name" onload="this.parentElement.classList.add('loaded')" />
                         <div class="background cover"></div>
                         <h2 class="center">{{game.name}}</h2>
                     </a>
                 </transition-group>
                 <div v-if="games.length == 0 && toAdd.length == 0">
-                    <p style="text-align: center; margin: 0; padding-bottom: 10px; color: gray">Sorry, no games were found with this name</p>
+                    <p style="text-align: center; margin: 0; padding-bottom: 10px; color: gray">{{lang.term('sorry_no_games_found')}}</p>
                 </div>
             </section>
             <footer>
@@ -48,8 +48,8 @@
                 </svg>
                 <section id="footer">
                     <h2>ENQUIRY</h2>
-                    <a href="/accessibility">Accessibility Settings</a>
-                    <a href="/contact">Contact Us</a>
+                    <a v-bind:href="'/' + lang + '/accessibility'">{{lang.term('accessibilitysettings')}}</a>
+                    <a v-bind:href="'/' + lang + '/contact'">{{lang.term('contactus')}}</a>
                 </section>
             </footer>
         </div>
