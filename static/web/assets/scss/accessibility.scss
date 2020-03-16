@@ -85,7 +85,7 @@ body, #app {
 }
 
 .card.can-hover:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(238, 238, 238);
 }
 
 .selected {
@@ -99,5 +99,55 @@ body, #app {
 
     .card.fix-height {
         height: 150px !important;
+    }
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 40px;
+    @include app.transition(background-color linear 0.1s);
+    cursor: pointer;
+    line-height: 20px;
+    
+    @extend .no-select;
+
+    input {
+        display: none;
+    }
+
+    .checkmark {
+        position: absolute;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: rgb(211, 211, 211);
+        border-radius: 3px;
+
+        @include app.transition((background-color linear 0.1s, border-radius linear 0.1s));
+    }
+
+    &:hover input:not(:checked) ~ .checkmark {
+        background-color: rgb(196, 196, 196);
+        border-radius: 6px;
+    }
+
+    input:checked {
+        ~ .checkmark {
+            background-color: rgb(85, 85, 85);
+            border-radius: 10px;
+        }
+
+        ~ .on {
+            display: inline;
+        }
+
+        ~ .off {
+            display: none;
+        }
+    }
+
+    .on {
+        display: none;
     }
 }

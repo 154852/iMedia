@@ -104,7 +104,7 @@ a.inline {
   display: inline;
 }
 
-.no-select {
+.no-select, .checkbox {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -289,7 +289,7 @@ body, #app {
 }
 
 .card.can-hover:hover {
-  background-color: white;
+  background-color: #eeeeee;
 }
 
 .selected {
@@ -304,4 +304,49 @@ body, #app {
   .card.fix-height {
     height: 150px !important;
   }
+}
+.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+  transition: background-color linear 0.1s;
+  -webkit-transition: background-color linear 0.1s;
+  -moz-transition: background-color linear 0.1s;
+  -ms-transition: background-color linear 0.1s;
+  -o-transition: background-color linear 0.1s;
+  cursor: pointer;
+  line-height: 20px;
+}
+.checkbox input {
+  display: none;
+}
+.checkbox .checkmark {
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 3px;
+  transition: background-color linear 0.1s, border-radius linear 0.1s;
+  -webkit-transition: background-color linear 0.1s, border-radius linear 0.1s;
+  -moz-transition: background-color linear 0.1s, border-radius linear 0.1s;
+  -ms-transition: background-color linear 0.1s, border-radius linear 0.1s;
+  -o-transition: background-color linear 0.1s, border-radius linear 0.1s;
+}
+.checkbox:hover input:not(:checked) ~ .checkmark {
+  background-color: #c4c4c4;
+  border-radius: 6px;
+}
+.checkbox input:checked ~ .checkmark {
+  background-color: #555555;
+  border-radius: 10px;
+}
+.checkbox input:checked ~ .on {
+  display: inline;
+}
+.checkbox input:checked ~ .off {
+  display: none;
+}
+.checkbox .on {
+  display: none;
 }

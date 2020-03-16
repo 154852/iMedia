@@ -43,6 +43,13 @@
                     <div class="card" style="margin-bottom: 10px;">{{accessibility.language.name}} ({{lang.term('selected')}})</div>
                     <hr />
                     <div class="card can-hover" v-for="language in Language.options()" v-if="accessibility.language != language" style="cursor: pointer;" @click="accessibility.setLanguage(language)">{{language.name}}</div>
+                    <h2>{{lang.term('reduced_noise')}}</h2>
+                    <label class="checkbox card can-hover">
+                        <input type="checkbox" v-model="accessibility.reduceNoise" />
+                        <span class="on">{{lang.term('enabled')}}</span>
+                        <span class="off">{{lang.term('disabled')}}</span>
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
             </section>
             <footer>

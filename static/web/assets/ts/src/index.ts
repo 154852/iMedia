@@ -264,6 +264,9 @@ class Language {
         how_help: What can we do to help you?
         language: Language
         selected: selected
+        enabled: Enabled
+        disabled: Disabled
+        reduced_noise: Reduced Noise
         `))],
         ["fr", new Language("fr", "French", Language.parseLanguageString(`
         login: S'Identifier
@@ -307,6 +310,9 @@ class Language {
         how_help: Que pouvons-nous faire pour vous aider?
         language: Langue
         selected: choisie
+        enabled: Activé
+        disabled: Desactivé
+        reduced_noise: Bruit Réduit
         `))]
     ]);
 
