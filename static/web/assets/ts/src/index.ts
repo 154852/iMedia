@@ -21,6 +21,9 @@ class UserContext {
 
     public load(): void {
         this.sessionKey = localStorage.getItem("sessionKey");
+        if (this.isLoggedIn(false)) (this.isLoggedIn(true) as Promise<boolean>).then((loggedIn) => {
+            if (!loggedIn) this.sessionKey = "";
+        });
     }
 
     public save(): void {
@@ -195,17 +198,25 @@ class Game {
 
 class Accessibility {
     public language: Language;
+    public reduceNoise: boolean;
 
-    public constructor(language: Language) {
+    public constructor(language: Language, reduceNoise: boolean) {
         this.language = language;
+        this.reduceNoise = reduceNoise;
     }
 
     public setLanguage(language: Language) {
-        window.open(window.location.href.replace(this.language.code, language.code), "_self");
+        window.open(window.location.protocol + "//" + window.location.host + window.location.pathname.replace(this.language.code, language.code), "_self");
+    }
+
+    public setReduceNoise(reduceNoise: boolean) {
+        this.reduceNoise = reduceNoise;
+        if (reduceNoise) localStorage.setItem("reduceNoise", "1");
+        else localStorage.setItem("reduceNoise", "0");
     }
 
     public static load(): Accessibility {
-        return new Accessibility(Language.load());
+        return new Accessibility(Language.load(), localStorage.getItem("reduceNoise") == "1");
     }
 }
 

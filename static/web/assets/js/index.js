@@ -20,7 +20,7 @@ const vue = new Vue({
     data: {
         games: [],
         query: "",
-        userCTX, lang
+        userCTX, lang, accessibility
     },
     methods: {
         readMore: () => smoothScroll(window.innerHeight, 300),

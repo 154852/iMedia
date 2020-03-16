@@ -15,17 +15,17 @@
         <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
-        <div id="app">
+        <div id="app" v-bind:class="{'reduceNoise': accessibility.reduceNoise}">
             <nav>
                 <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
                 <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
                 <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
-                <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-if="!accessibility.reduceNoise" class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
-                <h1 class="no-select center" id="background-accent">EQY</h1>
+                <h1 v-if="!accessibility.reduceNoise" class="no-select center" id="background-accent">EQY</h1>
                 <div class="no-select center" id="read-more" @click="readMore">
                     <p>{{lang.term('readmore')}}</p>
                     <svg viewBox="0 0 100 20" preserveAspectRatio="none" style="overflow: visible; height: 20px; width: 100px; display: block;">
@@ -37,7 +37,7 @@
                     <p>{{lang.term('how_help')}}</p>
                 </div>
             </section>
-            <section class="gray-bg" style="display: block; width: 100%">
+            <section v-bind:class="{'gray-bg': !accessibility.reduceNoise}" style="display: block; width: 100%">
                 <div style="width: 90%; margin: 0 auto;">
                     <h2 style="margin: 0; padding: 10px 0">{{lang.term('language')}}</h2>
                     <div class="card" style="margin-bottom: 10px;">{{accessibility.language.name}} ({{lang.term('selected')}})</div>
@@ -46,7 +46,7 @@
                 </div>
             </section>
             <footer>
-                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-bind:class="{'gray-bg': !accessibility.reduceNoise}" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <section id="footer">

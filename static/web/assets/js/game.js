@@ -21,7 +21,7 @@ const vue = new Vue({
         game: null,
         create: new GameReview(null, "", "", null, 1, null),
         error: null,
-        userCTX, lang
+        userCTX, lang, accessibility
     },
     methods: {
         createReview: function() {

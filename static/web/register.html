@@ -15,21 +15,21 @@
         <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
-        <div id="app">
+        <div id="app" v-bind:class="{'reduceNoise': accessibility.reduceNoise}">
             <nav>
                 <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
                 <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
                 <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <main>
-                <svg class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-if="!accessibility.reduceNoise" class="background" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
-                <div class="center" id="window" v-bind:class="{'error': error != null}" @keyup.enter="register">
+                <div class="center" id="window" v-bind:class="{'error': error != null && !accessibility.reduceNoise}" @keyup.enter="register">
                     <h1 style="text-align: center;">{{lang.term('signup')}}</h1>
-                    <hr />
+                    <hr v-if="!accessibility.reduceNoise" />
                     <p style="text-align: center;">{{lang.term('already_have_account')}} <a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('signin_here')}}</a></p>
-                    <hr style="margin-bottom: 10px;" />
+                    <hr v-if="!accessibility.reduceNoise" style="margin-bottom: 10px;" />
                     <input type="text" v-bind:placeholder="lang.term('username')" v-model="username" />
                     <input type="text" v-bind:placeholder="lang.term('email')" v-model="email" />
                     <input type="password" v-bind:placeholder="lang.term('password')" v-model="password" />
@@ -38,7 +38,7 @@
                 </div>
             </main>
             <footer>
-                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-bind:class="{'gray-bg': !accessibility.reduceNoise}" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <section id="footer">

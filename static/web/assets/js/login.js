@@ -5,7 +5,7 @@ const vue = new Vue({
         password: "",
         email: "",
         error: null,
-        userCTX, lang
+        userCTX, lang, accessibility
     },
     methods: {
         login: function() {

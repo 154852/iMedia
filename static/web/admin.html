@@ -15,7 +15,7 @@
         <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
-        <div id="app">
+        <div id="app" v-bind:class="{'reduceNoise': accessibility.reduceNoise}">
             <nav>
                 <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
                 <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
@@ -46,7 +46,7 @@
                 </div>
             </section>
             <footer>
-                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-bind:class="{'gray-bg': !accessibility.reduceNoise}" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <section id="footer">

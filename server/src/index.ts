@@ -72,7 +72,7 @@ app.post("/api/user/login", (req: express.Request, res: express.Response) => {
                 sessionKey: key.stringValue
             });
         }
-    })
+    });
 });
 
 app.post("/api/user/logout", (req: express.Request, res: express.Response) => {
@@ -106,7 +106,7 @@ app.post("/api/user/check-key", (req: express.Request, res: express.Response) =>
 app.post("/api/game/create", (req: express.Request, res: express.Response) => {
     Game.creationActivity.doesAllowUserInfo(req.body.user).then((acceptable) => {
         if (acceptable) {
-            let promise: string | Promise<Game> = Game.createGameFromOptions(req.body);
+            let promise: string | Promise<Game> = Game.createGameFromOptions(req.body, path.join(staticDir, "assets", "images", "downloaded"), "/assets/images/downloaded");
             if (typeof promise == "string") {
                 return res.status(400).send({
                     error: "ERR_INVALID_GAME_DETAILS",

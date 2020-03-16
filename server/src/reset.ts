@@ -14,6 +14,8 @@ const sequelize: Sequelize = new Sequelize({
     models: [SessionKey, User, Game, Review]
 });
 
+const staticDir: string = path.join(__dirname, "..", "..", "static", "web");
+
 sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
     sequelize.drop().then(() => sequelize.sync({ force: true })).then(async () => {
         let userPromises: Promise<User>[] = [];
@@ -44,7 +46,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                 "https://wallpaperaccess.com/full/217097.jpg"
             ],
             rating: 12
-        }) as Promise<Game>).then((game) => {
+        }, path.join(staticDir, "assets", "images", "downloaded"), "/assets/images/downloaded") as Promise<Game>).then((game) => {
             for (let i = 1; i <= 10; i++) {
                 (Review.createReviewFromOptions({
                     title: "Occaecat ad elit 1" + i,
@@ -66,7 +68,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                 "https://sm.ign.com/ign_za/screenshot/u/undertale-/undertale-gameplay_yn31.jpg"
             ],
             rating: 12
-        }) as Promise<Game>).then((game) => {
+        }, path.join(staticDir, "assets", "images", "downloaded"), "/assets/images/downloaded") as Promise<Game>).then((game) => {
             for (let i = 1; i <= 10; i++) {
                 Review.createReviewFromOptions({
                     title: "Occaecat ad elit 2" + i,
@@ -76,7 +78,7 @@ sequelize.query("SET FOREIGN_KEY_CHECKS=0").then(() => {
                     starRating: Math.random() * 6
                 });
             }
-        });
+        },);
 
         sequelize.query("SET FOREIGN_KEY_CHECKS=1");
     });

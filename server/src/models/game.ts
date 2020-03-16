@@ -4,6 +4,11 @@ import { Activity } from "../security";
 import { Sequelize } from "sequelize";
 import * as FuzzySearch from "fuzzy-search";
 import User from "./user";
+import * as fs from "fs";
+import * as https from "https";
+import * as path from "path";
+import * as jimp from"jimp";
+import {Transform} from "stream";
 
 export interface GameCreationOptions {
     name: string;
@@ -95,19 +100,32 @@ export default class Game extends Model<Game> {
         };
     }
 
-    public static createGameFromOptions(options: GameCreationOptions): Promise<Game> | string {
+    public static createGameFromOptions(options: GameCreationOptions, imageStore: string, imageStorePublic: string): Promise<Game> | string {
         options.name = options.name.trim();
         options.description = options.description.trim();
         if (options.name.length < 2) return "Game name must be at least two characters in length";
         if (options.description.length < 2) return "Game description must be at least two characters in length";
+
+        options.images.forEach(async (uri, idx) => {
+            https.get(uri, (response) => {
+                const stream: Transform = new Transform();
+                response.on("data", (chunk) => stream.push(chunk));
+                response.on("close", () => {
+                    jimp.read(stream.read() as Buffer).then((image) => {
+                        let imSize: number = idx == 0? 512:256;
+                        image.resize(imSize, image.getHeight() * (imSize / image.getWidth())).write(path.join(imageStore, options.name + "-" + idx + ".jpg"));
+                    });
+                })
+            });
+        });
         
         return Game.create({
             name: options.name,
             description: options.description,
-            logoImage: options.images[0],
-            image1: options.images[1],
-            image2: options.images[2],
-            image3: options.images[3],
+            logoImage: path.join(imageStorePublic, options.name + "-0.jpg"),
+            image1: path.join(imageStorePublic, options.name + "-1.jpg"),
+            image2: path.join(imageStorePublic, options.name + "-2.jpg"),
+            image3: path.join(imageStorePublic, options.name + "-3.jpg"),
             rating: options.rating
         });
     }

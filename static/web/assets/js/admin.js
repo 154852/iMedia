@@ -3,7 +3,7 @@ const vue = new Vue({
     data: {
         createGameData: Game.loadCache() || new Game(null, "", "", null),
         createGameError: null,
-        userCTX, lang
+        userCTX, lang, accessibility
     },
     methods: {
         createGame: function() {

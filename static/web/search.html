@@ -15,20 +15,20 @@
         <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
-        <div id="app">
+        <div id="app" v-bind:class="{'reduceNoise': accessibility.reduceNoise}">
             <nav>
                 <a v-bind:href="'/' + lang + '/'">ENQUIRY</a>
                 <div style="text-align: right;" v-if="!userCTX.isLoggedIn(false)"><a v-bind:href="'/' + lang + '/login'" class="inline">{{lang.term('login')}}</a> {{lang.term('or')}} <a v-bind:href="'/' + lang + '/register'" class="inline">{{lang.term('signup')}}</a></div>
                 <div style="text-align: right;" v-else><a @mouseup="userCTX.logout()" @touchend="userCTX.logout()">{{lang.term('logout')}}</a></div>
             </nav>
             <section id="landing">
-                <svg class="background" style="top: 1px" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-if="!accessibility.reduceNoise" class="background" style="top: 1px" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline class="gray-fill" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <h1 class="no-select center" id="background-accent">EQY</h1>
                 <input type="text" class="search center" v-bind:placeholder="lang.term('search')" @input="search" v-model="query" />
             </section>
-            <section class="gray-bg">
+            <section v-bind:class="{'gray-bg': !accessibility.reduceNoise}">
                 <h2 style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px;">{{lang.term('search_results')}}</h2>
                 <transition-group name="fade">
                     <a class="game no-hover" v-for="game in games" v-bind:href="'/' + lang + '/game/' + game.id" v-bind:key="game.id">
@@ -42,7 +42,7 @@
                 </div>
             </section>
             <footer>
-                <svg class="gray-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <svg v-bind:class="{'gray-bg': !accessibility.reduceNoise}" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polyline fill="white" points="0,30 100,70 100,100 0,100"></polyline>
                 </svg>
                 <section id="footer">
