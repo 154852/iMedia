@@ -112,7 +112,7 @@ export default class Game extends Model<Game> {
                 response.on("data", (chunk) => stream.push(chunk));
                 response.on("close", () => {
                     jimp.read(stream.read() as Buffer).then((image) => {
-                        let imSize: number = idx == 0? 512:256;
+                        let imSize: number = idx == 0? 700:256;
                         image.resize(imSize, image.getHeight() * (imSize / image.getWidth())).write(path.join(imageStore, options.name + "-" + idx + ".jpg"));
                     });
                 })

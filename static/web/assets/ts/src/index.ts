@@ -22,7 +22,10 @@ class UserContext {
     public load(): void {
         this.sessionKey = localStorage.getItem("sessionKey");
         if (this.isLoggedIn(false)) (this.isLoggedIn(true) as Promise<boolean>).then((loggedIn) => {
-            if (!loggedIn) this.sessionKey = "";
+            if (!loggedIn) {
+                this.sessionKey = "";
+                this.save();
+            }
         });
     }
 

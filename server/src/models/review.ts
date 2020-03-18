@@ -25,7 +25,6 @@ export default class Review extends Model<Review> {
     public static creationActivity: Activity = new Activity(2);
 
     @AllowNull(false)
-    @Unique(true)
     @Column({
        type: DataType.STRING(255)
     })
